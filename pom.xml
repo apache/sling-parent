@@ -231,7 +231,6 @@
                 </dependencies>
                 <configuration>
                     <projectVersionPolicyId>OddEvenVersionPolicy</projectVersionPolicyId>
-                    <tagBase>https://svn.apache.org/repos/asf/sling/tags</tagBase>
                 </configuration>
             </plugin>
             <plugin>
