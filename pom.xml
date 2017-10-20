@@ -59,9 +59,9 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/sling/trunk/parent</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/sling/trunk/parent</developerConnection>
-        <url>http://svn.apache.org/viewvc/sling/trunk/parent</url>
+        <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</conncetion>
+        <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
+        <url>https://gitbox.apache.org/repos/asf?p=sling-parent.git</url>
     </scm>
 
 
