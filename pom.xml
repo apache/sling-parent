@@ -342,6 +342,11 @@
                             </Bundle-DocURL>
                             <Bundle-Vendor>The Apache Software Foundation</Bundle-Vendor>
                             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                            <!-- Also include the "META-INF/maven/dependencies.properties" file being generated from depends-maven-plugin (used by pax exam) in the resulting JAR if it exists.
+                                 This is necessary as the maven-failsafe-plugin uses the final JAR as classpath when executing ITs (https://issues.apache.org/jira/browse/SUREFIRE-855).
+                                 ITs based on Pax Exam rely on the file "dependencies.properties" in the classpath when setting up the container.
+                             -->
+                            <Include-Resource>META-INF/maven/dependencies.properties=-${project.build.outputDirectory}/META-INF/maven/dependencies.properties,{maven-resources}</Include-Resource>
                         </instructions>
                     </configuration>
                     <executions>
