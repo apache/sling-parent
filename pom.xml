@@ -328,7 +328,7 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>3.5.0</version>
                     <inherited>true</inherited>
                     <configuration>
                         <outputDirectory>${basedir}/target/classes</outputDirectory>
@@ -1187,7 +1187,7 @@
             <dependency>
                 <groupId>biz.aQute.bnd</groupId>
                 <artifactId>biz.aQute.bndlib</artifactId>
-                <version>3.4.0</version>
+                <version>3.5.0</version>
                 <scope>provided</scope>
             </dependency>
 
