@@ -1181,16 +1181,6 @@
                 <scope>test</scope>
             </dependency>
 
-
-            <!-- DEPRECATED : Use the osgi.annotation instead -->
-            <!-- this version must match the version being used by the maven-bundle-plugin -->
-            <dependency>
-                <groupId>biz.aQute.bnd</groupId>
-                <artifactId>biz.aQute.bndlib</artifactId>
-                <version>3.5.0</version>
-                <scope>provided</scope>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
