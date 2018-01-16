@@ -258,6 +258,8 @@
                         <exclude>hs_err_*.log</exclude>
                         <!-- Lucene index details (Oak 1.6) -->
                         <exclude>**/repository/index/*/index-details.txt</exclude>
+                        <!-- bnd -->
+                        <exclude>bnd.bnd</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -368,6 +370,13 @@
                     <groupId>biz.aQute.bnd</groupId>
                     <artifactId>bnd-maven-plugin</artifactId>
                     <version>3.5.0</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>bnd-process</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
