@@ -1133,15 +1133,13 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- OSGi annotations: @Version, @ProviderType, @ConsumerType -->
+            <!-- OSGi annotations -->
            <dependency>
                 <groupId>org.osgi</groupId>
-                <artifactId>osgi.annotation</artifactId>
-                <version>6.0.1</version>
+                <artifactId>org.osgi.annotation.versioning</artifactId>
+                <version>1.0.0</version>
                 <scope>provided</scope>
             </dependency>
-
-            <!-- OSGi annotations for DS and metatype -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.component.annotations</artifactId>
@@ -1184,21 +1182,6 @@
 
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>osgi.annotation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.service.component.annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.service.metatype.annotations</artifactId>
-        </dependency>
-    </dependencies>
 
     <distributionManagement>
         <site>
