@@ -508,7 +508,7 @@
             <id>bundle</id>
             <activation>
                 <file>
-                    <exists>target/classes/META-INF/MANIFEST.MF</exists>
+                    <exists>bnd.bnd</exists>
                 </file>
             </activation>
             <build>
