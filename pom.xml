@@ -487,9 +487,6 @@
                     <groupId>org.apache.servicemix.tooling</groupId>
                     <artifactId>depends-maven-plugin</artifactId>
                     <version>1.4.0</version>
-                    <configuration>
-                        <outputFile>${project.build.directory}/test-classes/META-INF/maven/dependencies.properties</outputFile>
-                    </configuration>
                     <executions>
                         <execution>
                             <goals>
