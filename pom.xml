@@ -1131,28 +1131,35 @@
 
         <!-- OSGi -->
         <dependencies>
+            <!-- Aggregates (rather use individual artifacts referenced below) -->
+            <!-- Core R6 -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.core</artifactId>
                 <version>6.0.0</version>
                 <scope>provided</scope>
             </dependency>
+            <!-- Compendium R6 -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.cmpn</artifactId>
                 <version>6.0.0</version>
                 <scope>provided</scope>
             </dependency>
+            <!-- individual OSGi spec API artifacts (preferred), all part of OSGi R6   -->
+            <!-- Configuration Admin 1.5 (https://osgi.org/javadoc/r6/cmpn/org/osgi/service/cm/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.cm</artifactId>
                 <version>1.5.0</version>
             </dependency>
+            <!-- Service Component 1.3 (https://osgi.org/javadoc/r6/cmpn/org/osgi/service/component/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.component</artifactId>
                 <version>1.3.0</version>
             </dependency>
+            <!--  Event Admin 1.3.1 (https://osgi.org/javadoc/r6/cmpn/org/osgi/service/event/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.event</artifactId>
@@ -1191,19 +1198,22 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- OSGi annotations -->
+            <!-- OSGi annotations (OSGi R6) -->
+            <!-- https://osgi.org/javadoc/r6/annotation/ -->
            <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.annotation.versioning</artifactId>
                 <version>1.0.0</version>
                 <scope>provided</scope>
             </dependency>
+            <!-- https://osgi.org/javadoc/r6/cmpn/org/osgi/service/component/annotations/package-summary.html -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.component.annotations</artifactId>
                 <version>1.3.0</version>
                 <scope>provided</scope>
             </dependency>
+            <!-- https://osgi.org/javadoc/r6/cmpn/org/osgi/service/metatype/annotations/package-summary.html -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.metatype.annotations</artifactId>
