@@ -406,7 +406,7 @@ Bundle-Vendor: The Apache Software Foundation
                 <plugin>
                     <groupId>biz.aQute.bnd</groupId>
                     <artifactId>bnd-baseline-maven-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>4.0.0</version>
                     <executions>
                         <execution>
                             <goals>
