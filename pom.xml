@@ -1243,10 +1243,11 @@ Bundle-Vendor: The Apache Software Foundation
                 <scope>provided</scope>
             </dependency>
 
+            <!-- Jetbrains annotations for null-analysis (SLING-7798) -->
             <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>3.0.0</version>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>16.0.2</version>                
                 <scope>provided</scope>
             </dependency>
 
