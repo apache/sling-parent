@@ -60,13 +60,17 @@
                                 <bnd><![CDATA[
 Bundle-Category: sling
 
-Bundle-Description: ${project.description}
+Bundle-Description: "${project.description}"
 
 Bundle-DocURL: https://sling.apache.org
 
 Bundle-License: Apache License, Version 2.0
 
 Bundle-Vendor: The Apache Software Foundation
+
+Bundle-DocUrl: ${project.url}
+
+Bundle-SCM: url=${project.scm.url},connection=${project.scm.connection},developer-connection=${project.scm.developerConnection},tag=${project.scm.tag}
 
 # export all versioned packages by default
 -exportcontents: ${packages;VERSIONED}
