@@ -118,7 +118,6 @@ Bundle-Vendor: The Apache Software Foundation
                                 <bannedPlugins>
                                     <excludes>
                                         <exclude>org.apache.felix:maven-scr-plugin</exclude>
-                                        <exclude>org.apache.felix:maven-bundle-plugin</exclude>
                                     </excludes>
                                     <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
                                         annotations or stick with Sling Parent 29.</message>
@@ -223,6 +222,12 @@ Bundle-Vendor: The Apache Software Foundation
                 <scope>provided</scope>
             </dependency>
             <!-- individual OSGi spec API artifacts (preferred), all part of OSGi Compendium R6 -->
+            <!-- OSGi framework 1.8 (https://osgi.org/javadoc/r6/core/org/osgi/framework/package-summary.html) -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.framework</artifactId>
+                <version>1.8.0</version>
+            </dependency>
             <!-- Configuration Admin 1.5 (https://osgi.org/javadoc/r6/cmpn/org/osgi/service/cm/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
