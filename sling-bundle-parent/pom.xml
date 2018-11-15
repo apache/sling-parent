@@ -239,7 +239,8 @@ Bundle-SCM: url=${project.scm.url},connection=${project.scm.connection},develope
                 <version>1.6.0</version>
             </dependency>
             <!-- Service Component 1.4, R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/package-frame.html) -->
-            <dependency>
+	    <!-- and component propertytypes (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/propertytypes/package-frame.html) -->
+	    <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.component</artifactId>
                 <version>1.4.0</version>
