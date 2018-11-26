@@ -225,27 +225,27 @@ Bundle-SCM: url=${project.scm.url},connection=${project.scm.connection},develope
                 <version>6.0.0</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- individual OSGi spec API artifacts (preferred), all part of OSGi Compendium R6 -->
-            <!-- OSGi framework 1.8 (https://osgi.org/javadoc/r6/core/org/osgi/framework/package-summary.html) -->
+            <!-- individual OSGi spec API artifacts (preferred) -->
+            <!-- OSGi framework 1.8, Core R6 (https://osgi.org/javadoc/r6/core/org/osgi/framework/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.framework</artifactId>
                 <version>1.8.0</version>
             </dependency>
-            <!-- Configuration Admin 1.6, R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/cm/package-frame.html) -->
+            <!-- Configuration Admin 1.6, Compendium R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/cm/package-frame.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.cm</artifactId>
                 <version>1.6.0</version>
             </dependency>
-            <!-- Service Component 1.4, R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/package-frame.html) -->
-	    <!-- and component propertytypes (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/propertytypes/package-frame.html) -->
-	    <dependency>
+            <!-- Service Component 1.4, Compendium R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/package-frame.html) -->
+            <!-- and component property types (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/propertytypes/package-frame.html) -->
+            <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.component</artifactId>
                 <version>1.4.0</version>
             </dependency>
-            <!-- Event Admin 1.3.1, R6 (https://osgi.org/javadoc/r6/cmpn/org/osgi/service/event/package-summary.html) -->
+            <!-- Event Admin 1.3.1, Compendium R6 (https://osgi.org/javadoc/r6/cmpn/org/osgi/service/event/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.event</artifactId>
