@@ -62,8 +62,6 @@ Bundle-Category: sling
 
 Bundle-Description: "${project.description}"
 
-Bundle-DocURL: https://sling.apache.org
-
 Bundle-License: Apache License, Version 2.0
 
 Bundle-Vendor: The Apache Software Foundation
