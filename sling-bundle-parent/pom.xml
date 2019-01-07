@@ -128,6 +128,23 @@ Bundle-SCM: url=${project.scm.url},connection=${project.scm.connection},develope
                         </configuration>
                     </execution>
                     <execution>
+                        <id>ban-felix-scr-annotations</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>org.apache.felix:org.apache.felix.scr.annotations</exclude>
+                                    </excludes>
+                                    <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
+                                        annotations or stick with Sling Parent 29.</message>
+                                </bannedDependencies>
+                            </rules>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>ban-maven-bundle-plugin</id>
                         <goals>
                             <goal>enforce</goal>
