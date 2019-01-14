@@ -725,7 +725,7 @@
                                                     org.apache.sling
                                                 </groupId>
                                                 <artifactId>
-                                                    maven-sling-plugin
+                                                    sling-maven-plugin
                                                 </artifactId>
                                                 <versionRange>
                                                     [2.1.0,)
