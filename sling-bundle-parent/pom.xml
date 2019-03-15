@@ -40,6 +40,7 @@
     <build>
         <pluginManagement>
             <plugins>
+
                 <plugin>
                     <groupId>org.apache.sling</groupId>
                     <artifactId>sling-maven-plugin</artifactId>
@@ -148,6 +149,22 @@ Bundle-Category: sling
                                     <message>The maven-bundle-plugin is no longer supported - please migrate to bnd-maven-plugin or stick
                                         with Sling Parent 34.</message>
                                 </bannedPlugins>
+                            </rules>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>ban-maven-sling-plugin</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedPlugins>
+                                    <excludes>
+                                        <exclude>org.apache.sling:maven-sling-plugin</exclude>
+                                    </excludes>
+                                    <message>Please change all occurences of maven-sling-plugin to sling-maven-plugin (plugin was renamed).</message>
+                                  </bannedPlugins>
                             </rules>
                         </configuration>
                     </execution>
