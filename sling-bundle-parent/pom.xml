@@ -34,7 +34,7 @@
     <description>The parent project for Apache Sling bundle modules</description>
 
     <properties>
-        <bnd.version>4.1.0</bnd.version>
+        <bnd.version>4.2.0</bnd.version>
     </properties>
 
     <build>
@@ -57,17 +57,8 @@
                             </goals>
                             <configuration>
                                 <bnd><![CDATA[
+# a lot of bundle header are generated from pom elements by default: https://github.com/bndtools/bnd/tree/master/maven/bnd-maven-plugin#default-bundle-headers
 Bundle-Category: sling
-
-Bundle-Description: "${project.description}"
-
-Bundle-License: Apache License, Version 2.0
-
-Bundle-Vendor: The Apache Software Foundation
-
-Bundle-DocUrl: ${project.url}
-
-Bundle-SCM: url=${project.scm.url},connection=${project.scm.connection},developer-connection=${project.scm.developerConnection},tag=${project.scm.tag}
 
 # export all versioned packages by default
 -exportcontents: ${packages;VERSIONED}
