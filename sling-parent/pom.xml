@@ -124,7 +124,7 @@
                                     <property>sling.java.version</property>
                                     <regex>^(8|9|1[0-9])$</regex>
                                     <regexMessage>
-                                        The value of the "sling.java.version" property should comply with the following rule: ^(8|9|1[0-9])$.
+                                        The value of the "sling.java.version" property should comply with the following pattern: ^(8|9|1[0-9])$.
                                     </regexMessage>
                                 </requireProperty>
                             </rules>
