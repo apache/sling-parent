@@ -27,6 +27,13 @@
     <name>Apache Sling Parent Reactor</name>
     <description>The reactor pom to build all Sling parents</description>
 
+    <scm>
+        <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
+        <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
+        <url>https://gitbox.apache.org/repos/asf?p=sling-parent.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <modules>
         <module>sling-parent</module>
         <module>sling-bundle-parent</module>
