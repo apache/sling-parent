@@ -87,6 +87,7 @@ Bundle-DocURL: http://sling.apache.org
                     <version>${bnd.version}</version>
                     <configuration>
                         <includeDistributionManagement>false</includeDistributionManagement>
+                        <fullReport>true</fullReport>
                     </configuration>
                     <executions>
                         <execution>
