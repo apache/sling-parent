@@ -74,6 +74,9 @@ Bundle-Category: sling
 # compare with https://www.mail-archive.com/dev@sling.apache.org/msg76177.html
 -snapshot: ${tstamp;yyyyMMddHHmmssSSS}
 
+# reproducible builds (https://github.com/bndtools/bnd/issues/3521)
+-noextraheaders: true
+
 # we cannot let bnd-maven-plugin generate it automatically, as Maven applies some inheritance logic which is incorrect for Sling (https://issues.apache.org/jira/browse/SLING-8537)
 Bundle-DocURL: http://sling.apache.org
                                 ]]></bnd>
