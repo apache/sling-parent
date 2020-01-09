@@ -23,6 +23,14 @@
     <packaging>pom</packaging>
     <version>36-SNAPSHOT</version>
 
+    <!-- the ASF parent is necessary to trigger the right release profile -->
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>22</version>
+        <relativePath />
+    </parent>
+    
     <name>Apache Sling Parent Reactor</name>
     <description>The reactor pom to build all Sling parents</description>
 
