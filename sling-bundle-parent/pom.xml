@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling</artifactId>
-        <version>36</version>
+        <version>37-SNAPSHOT</version>
         <relativePath>../sling-parent</relativePath>
     </parent>
 
