@@ -90,6 +90,10 @@ Bundle-DocURL: http://sling.apache.org
                     <configuration>
                         <includeDistributionManagement>false</includeDistributionManagement>
                         <fullReport>true</fullReport>
+                        <diffignores>
+                            <!-- ignore Bundle-Version header for baseline, i.e. no enforcement of specific bundle versions -->
+                            <diffignore>Bundle-Version</diffignore>
+                        </diffignores>
                     </configuration>
                     <executions>
                         <execution>
