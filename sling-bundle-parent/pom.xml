@@ -77,7 +77,7 @@ Bundle-Category: sling
 -noextraheaders: true
 
 # we cannot let bnd-maven-plugin generate it automatically, as Maven applies some inheritance logic which is incorrect for Sling (https://issues.apache.org/jira/browse/SLING-8537)
-Bundle-DocURL: http://sling.apache.org
+Bundle-DocURL: https://sling.apache.org
                                 ]]></bnd>
                             </configuration>
                         </execution>
