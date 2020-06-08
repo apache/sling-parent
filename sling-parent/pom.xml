@@ -245,6 +245,26 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!-- generate sha512 checksums for all attached artifacts (not supported by ASF parent pom yet, https://issues.apache.org/jira/browse/MPOM-244) -->
+                <plugin>
+                    <groupId>net.nicoulaj.maven.plugins</groupId>
+                    <artifactId>checksum-maven-plugin</artifactId>
+                    <version>1.9</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>artifacts</goal>
+                            </goals>
+                            <configuration>
+                                <algorithms>
+                                    <algorithm>SHA-512</algorithm>
+                                </algorithms>
+                                <!-- make sure to attach to also upload to staging repo (https://issues.apache.org/jira/browse/INFRA-14923) -->
+                                <attachChecksums>true</attachChecksums>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -414,6 +434,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.nicoulaj.maven.plugins</groupId>
+                <artifactId>checksum-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
