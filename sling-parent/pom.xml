@@ -41,6 +41,10 @@
         <url>https://issues.apache.org/jira/browse/SLING</url>
     </issueManagement>
 
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>https://ci-builds.apache.org/job/Sling/</url>
+    </ciManagement>
 
     <properties>
         <site.jira.version.id>12313945</site.jira.version.id>
