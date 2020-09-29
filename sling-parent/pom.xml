@@ -484,6 +484,9 @@
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <propertyName>jacoco.command</propertyName>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>prepare-agent</id>
@@ -554,6 +557,27 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${jacoco.command}</argLine>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <argLine>${jacoco.command}</argLine>
+                            <systemPropertyVariables>
+                                <!--
+                                for IT where you need a forked JVM to run the tests you can use this system property to make sure that
+                                the JaCoCo agent correctly instruments your code
+                                 -->
+                                <jacoco.command>${jacoco.command}</jacoco.command>
+                            </systemPropertyVariables>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
