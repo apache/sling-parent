@@ -118,7 +118,8 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                      <execution>
-                        <id>enforce-property-values</id>
+                        <!-- override execution id defined in ASF parent (not supported via property yet, https://issues.apache.org/jira/browse/MPOM-247) -->
+                        <id>enforce-maven-version</id>
                         <goals>
                           <goal>enforce</goal>
                         </goals>
@@ -131,30 +132,10 @@
                                         The value of the "sling.java.version" property should comply with the following pattern: ^(8|9|1[0-9])$.
                                     </regexMessage>
                                 </requireProperty>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>enforce-java-version</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <requireJavaVersion>
                                     <version>1.8.0</version>
                                     <message>Apache Sling must be compiled with Java 8 or higher.</message>
                                 </requireJavaVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>enforce-maven-version</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <requireMavenVersion>
                                     <version>3.3.9</version>
                                 </requireMavenVersion>

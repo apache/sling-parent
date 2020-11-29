@@ -121,7 +121,7 @@ Bundle-DocURL: https://sling.apache.org
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>ban-maven-scr-plugin</id>
+                        <id>ban-plugins-and-dependencies</id>
                         <goals>
                             <goal>enforce</goal>
                         </goals>
@@ -134,16 +134,6 @@ Bundle-DocURL: https://sling.apache.org
                                     <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
                                         annotations or stick with Sling Parent 29.</message>
                                 </bannedPlugins>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ban-felix-scr-annotations</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <bannedDependencies>
                                     <excludes>
                                         <exclude>org.apache.felix:org.apache.felix.scr.annotations</exclude>
@@ -151,16 +141,6 @@ Bundle-DocURL: https://sling.apache.org
                                     <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
                                         annotations or stick with Sling Parent 29.</message>
                                 </bannedDependencies>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ban-maven-bundle-plugin</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <bannedPlugins>
                                     <excludes>
                                         <exclude>org.apache.felix:maven-bundle-plugin</exclude>
@@ -168,22 +148,12 @@ Bundle-DocURL: https://sling.apache.org
                                     <message>The maven-bundle-plugin is no longer supported - please migrate to bnd-maven-plugin or stick
                                         with Sling Parent 34.</message>
                                 </bannedPlugins>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ban-maven-sling-plugin</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <bannedPlugins>
                                     <excludes>
                                         <exclude>org.apache.sling:maven-sling-plugin</exclude>
                                     </excludes>
                                     <message>Please change all occurences of maven-sling-plugin to sling-maven-plugin (plugin was renamed).</message>
-                                  </bannedPlugins>
+                                </bannedPlugins>
                             </rules>
                         </configuration>
                     </execution>
