@@ -55,9 +55,7 @@
             one of these values:
               - 8: Java 8 (default)
               - 9: Java 9
-              - 10: Java 10
-              - 11: Java 11
-              - 12: Java 12
+              - 10..19: Java 10-19
         -->
         <sling.java.version>8</sling.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
