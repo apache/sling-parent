@@ -86,6 +86,8 @@
                 <configuration>
                     <stylesheet>maven</stylesheet>
                     <excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</excludePackageNames>
+                    <!-- suppress timestamp for reproducible builds (https://issues.apache.org/jira/browse/MPOM-260) -->
+                    <notimestamp>true</notimestamp>
                 </configuration>
             </plugin>
             <plugin>
