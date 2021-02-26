@@ -850,6 +850,45 @@
                 </pluginManagement>
             </build>
         </profile>
+        <!-- This profile is only active when building this parent pom (or sling-bundle-parent) -->
+        <profile>
+            <id>parent-pom-build</id>
+            <activation>
+                <file>
+                    <exists>.isParentPom</exists>
+                </file>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                    <!-- Create a source-release artifact that contains the fully buildable
+                         project directory source structure. This is the artifact which is
+                         the official subject of any release vote. -->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-assembly-plugin</artifactId>
+                            <!-- add dedicated execution as the one defined in ASF Parent POM only runs at execution root -->
+                            <executions>
+                                <execution>
+                                    <id>source-release-assembly-for-pom</id>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>single</goal>
+                                    </goals>
+                                    <configuration>
+                                        <runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
+                                        <descriptorRefs>
+                                            <descriptorRef>${sourceReleaseAssemblyDescriptor}</descriptorRef>
+                                        </descriptorRefs>
+                                        <tarLongFileMode>posix</tarLongFileMode>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
     </profiles>
 
     <mailingLists>
