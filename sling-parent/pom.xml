@@ -245,6 +245,7 @@
                         <!-- bnd -->
                         <exclude>bnd.bnd</exclude>
                     </excludes>
+                    <consoleOutput>true</consoleOutput>
                 </configuration>
                 <executions>
                     <execution>
