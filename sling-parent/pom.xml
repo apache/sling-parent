@@ -196,18 +196,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M4</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.release</groupId>
                         <artifactId>maven-release-oddeven-policy</artifactId>
-                        <version>3.0.0-M1</version>
-                    </dependency>
-                    <!-- workaround for https://issues.apache.org/jira/browse/MRELEASE-1040,
-                         dependency necessary for maven-release-oddeven-policy  -->
-                    <dependency>
-                        <groupId>org.eclipse.aether</groupId>
-                        <artifactId>aether-util</artifactId>
-                        <version>1.0.0.v20140518</version>
+                        <version>3.0.0-M4</version>
                     </dependency>
                 </dependencies>
                 <configuration>
