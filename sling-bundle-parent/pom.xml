@@ -220,11 +220,18 @@ Bundle-DocURL: https://sling.apache.org
                 <scope>provided</scope>
             </dependency>
             <!-- individual OSGi spec API artifacts (preferred) -->
-            <!-- OSGi framework 1.8, Core R6 (https://osgi.org/javadoc/r6/core/org/osgi/framework/package-summary.html) -->
+            <!-- OSGi framework 1.8, Core R7 (https://osgi.org/javadoc/r7/core/org/osgi/framework/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.framework</artifactId>
                 <version>1.8.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- OSGi Tracker 1.5, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/util/tracker/package-summary.html) -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.util.tracker</artifactId>
+                <version>1.5.2</version>
                 <scope>provided</scope>
             </dependency>
             <!-- Configuration Admin 1.6, Compendium R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/cm/package-frame.html) -->
