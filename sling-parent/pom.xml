@@ -28,7 +28,7 @@
     <groupId>org.apache.sling</groupId>
     <artifactId>sling</artifactId>
     <packaging>pom</packaging>
-    <version>40-SNAPSHOT</version>
+    <version>42-SNAPSHOT</version>
 
     <name>Apache Sling (Parent)</name>
     <description>The parent project for Apache Sling</description>
@@ -41,6 +41,10 @@
         <url>https://issues.apache.org/jira/browse/SLING</url>
     </issueManagement>
 
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>https://ci-builds.apache.org/job/Sling/</url>
+    </ciManagement>
 
     <properties>
         <site.jira.version.id>12313945</site.jira.version.id>
@@ -51,9 +55,7 @@
             one of these values:
               - 8: Java 8 (default)
               - 9: Java 9
-              - 10: Java 10
-              - 11: Java 11
-              - 12: Java 12
+              - 10..19: Java 10-19
         -->
         <sling.java.version>8</sling.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -65,15 +67,15 @@
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=sling-parent.git</url>
-        <tag>sling-parent-reactor-36</tag>
+        <tag>sling-parent-reactor-41</tag>
     </scm>
-
 
     <reporting>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <!-- configuration set in build->pluginMgmt -->
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -81,10 +83,6 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-                <configuration>
-                    <stylesheet>maven</stylesheet>
-                    <excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</excludePackageNames>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -269,7 +267,8 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                      <execution>
-                        <id>enforce-property-values</id>
+                        <!-- override execution id defined in ASF parent (not supported via property yet, https://issues.apache.org/jira/browse/MPOM-247) -->
+                        <id>enforce-maven-version</id>
                         <goals>
                           <goal>enforce</goal>
                         </goals>
@@ -282,30 +281,10 @@
                                         The value of the "sling.java.version" property should comply with the following pattern: ^(8|9|1[0-9])$.
                                     </regexMessage>
                                 </requireProperty>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>enforce-java-version</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <requireJavaVersion>
                                     <version>1.8.0</version>
                                     <message>Apache Sling must be compiled with Java 8 or higher.</message>
                                 </requireJavaVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>enforce-maven-version</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <requireMavenVersion>
                                     <version>3.3.9</version>
                                 </requireMavenVersion>
@@ -361,7 +340,7 @@
                         </goals>
                         <configuration>
                             <resourceBundles>
-                                <resourceBundle>org.apache.sling:apache-sling-jar-resource-bundle:1.0.3-SNAPSHOT</resourceBundle>
+                                <resourceBundle>org.apache.sling:apache-sling-jar-resource-bundle:1.0.2</resourceBundle>
                                 <resourceBundle>org.apache:apache-jar-resource-bundle:1.4</resourceBundle>
                             </resourceBundles>
                         </configuration>
@@ -371,18 +350,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M4</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.release</groupId>
                         <artifactId>maven-release-oddeven-policy</artifactId>
-                        <version>3.0.0-M1</version>
-                    </dependency>
-                    <!-- workaround for https://issues.apache.org/jira/browse/MRELEASE-1040,
-                         dependency necessary for maven-release-oddeven-policy  -->
-                    <dependency>
-                        <groupId>org.eclipse.aether</groupId>
-                        <artifactId>aether-util</artifactId>
-                        <version>1.0.0.v20140518</version>
+                        <version>3.0.0-M4</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -420,6 +393,7 @@
                         <!-- bnd -->
                         <exclude>bnd.bnd</exclude>
                     </excludes>
+                    <consoleOutput>true</consoleOutput>
                 </configuration>
                 <executions>
                     <execution>
@@ -440,65 +414,15 @@
 
     <profiles>
         <profile>
-            <id>emma</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>emma-maven-plugin</artifactId>
-                        <inherited>true</inherited>
-                        <executions>
-                            <execution>
-                                <phase>prepare-package</phase>
-                                <goals>
-                                    <goal>instrument</goal>
-                                </goals>
-                                <configuration>
-                                    <metadataFile>${user.dir}/coverage.em</metadataFile>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>emma-report</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.groovy.maven</groupId>
-                        <artifactId>gmaven-plugin</artifactId>
-                        <executions>
-                            <!-- store the project's source dir in a comma-delimited list for the emma report. -->
-                            <execution>
-                                <id>save-bundle-metadata</id>
-                                <goals>
-                                    <goal>execute</goal>
-                                </goals>
-                                <phase>validate</phase>
-                                <configuration>
-                                    <source>
-                                        if (!session.executionProperties.sourceDirs) {
-                                            session.executionProperties.sourceDirs = "${basedir}/src/main/java"
-                                        } else {
-                                            session.executionProperties.sourceDirs += ",${basedir}/src/main/java"
-                                        }
-                                    </source>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>jacoco-report</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <propertyName>jacoco.command</propertyName>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>prepare-agent</id>
@@ -569,6 +493,27 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${jacoco.command}</argLine>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <argLine>${jacoco.command}</argLine>
+                            <systemPropertyVariables>
+                                <!--
+                                for IT where you need a forked JVM to run the tests you can use this system property to make sure that
+                                the JaCoCo agent correctly instruments your code
+                                 -->
+                                <jacoco.command>${jacoco.command}</jacoco.command>
+                            </systemPropertyVariables>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -940,6 +885,45 @@
                 </pluginManagement>
             </build>
         </profile>
+        <!-- This profile is only active when building this parent pom (or sling-bundle-parent) -->
+        <profile>
+            <id>parent-pom-build</id>
+            <activation>
+                <file>
+                    <exists>.isParentPom</exists>
+                </file>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                    <!-- Create a source-release artifact that contains the fully buildable
+                         project directory source structure. This is the artifact which is
+                         the official subject of any release vote. -->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-assembly-plugin</artifactId>
+                            <!-- add dedicated execution as the one defined in ASF Parent POM only runs at execution root -->
+                            <executions>
+                                <execution>
+                                    <id>source-release-assembly-for-pom</id>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>single</goal>
+                                    </goals>
+                                    <configuration>
+                                        <runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
+                                        <descriptorRefs>
+                                            <descriptorRef>${sourceReleaseAssemblyDescriptor}</descriptorRef>
+                                        </descriptorRefs>
+                                        <tarLongFileMode>posix</tarLongFileMode>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
     </profiles>
 
     <mailingLists>
@@ -1044,13 +1028,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jmock</groupId>
-                <artifactId>jmock-junit4</artifactId>
-                <version>2.8.2</version>
+                <version>4.13.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

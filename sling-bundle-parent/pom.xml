@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling</artifactId>
-        <version>40-SNAPSHOT</version>
+        <version>42-SNAPSHOT</version>
         <relativePath>../sling-parent</relativePath>
     </parent>
 
@@ -36,11 +36,11 @@
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=sling-parent.git</url>
-        <tag>sling-parent-reactor-36</tag>
+        <tag>sling-parent-reactor-41</tag>
     </scm>
 
     <properties>
-        <bnd.version>5.1.0</bnd.version>
+        <bnd.version>5.3.0</bnd.version>
     </properties>
 
     <build>
@@ -50,7 +50,7 @@
                 <plugin>
                     <groupId>org.apache.sling</groupId>
                     <artifactId>sling-maven-plugin</artifactId>
-                    <version>2.4.0</version>
+                    <version>2.4.2</version>
                 </plugin>
                 <plugin>
                     <groupId>biz.aQute.bnd</groupId>
@@ -121,7 +121,7 @@ Bundle-DocURL: https://sling.apache.org
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>ban-maven-scr-plugin</id>
+                        <id>ban-plugins-and-dependencies</id>
                         <goals>
                             <goal>enforce</goal>
                         </goals>
@@ -134,16 +134,6 @@ Bundle-DocURL: https://sling.apache.org
                                     <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
                                         annotations or stick with Sling Parent 29.</message>
                                 </bannedPlugins>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ban-felix-scr-annotations</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <bannedDependencies>
                                     <excludes>
                                         <exclude>org.apache.felix:org.apache.felix.scr.annotations</exclude>
@@ -151,16 +141,6 @@ Bundle-DocURL: https://sling.apache.org
                                     <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
                                         annotations or stick with Sling Parent 29.</message>
                                 </bannedDependencies>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ban-maven-bundle-plugin</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <bannedPlugins>
                                     <excludes>
                                         <exclude>org.apache.felix:maven-bundle-plugin</exclude>
@@ -168,22 +148,12 @@ Bundle-DocURL: https://sling.apache.org
                                     <message>The maven-bundle-plugin is no longer supported - please migrate to bnd-maven-plugin or stick
                                         with Sling Parent 34.</message>
                                 </bannedPlugins>
-                            </rules>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ban-maven-sling-plugin</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
                                 <bannedPlugins>
                                     <excludes>
                                         <exclude>org.apache.sling:maven-sling-plugin</exclude>
                                     </excludes>
                                     <message>Please change all occurences of maven-sling-plugin to sling-maven-plugin (plugin was renamed).</message>
-                                  </bannedPlugins>
+                                </bannedPlugins>
                             </rules>
                         </configuration>
                     </execution>
@@ -250,11 +220,18 @@ Bundle-DocURL: https://sling.apache.org
                 <scope>provided</scope>
             </dependency>
             <!-- individual OSGi spec API artifacts (preferred) -->
-            <!-- OSGi framework 1.8, Core R6 (https://osgi.org/javadoc/r6/core/org/osgi/framework/package-summary.html) -->
+            <!-- OSGi framework 1.8, Core R7 (https://osgi.org/javadoc/r7/core/org/osgi/framework/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.framework</artifactId>
                 <version>1.8.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- OSGi Tracker 1.5, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/util/tracker/package-summary.html) -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.util.tracker</artifactId>
+                <version>1.5.2</version>
                 <scope>provided</scope>
             </dependency>
             <!-- Configuration Admin 1.6, Compendium R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/cm/package-frame.html) -->
