@@ -106,161 +106,6 @@
     </reporting>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <!-- upgrade from 1.4.1 in ASF parent -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M3</version>
-                </plugin>
-                <!-- upgrade from 3.0.1 in ASF parent -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-changes-plugin</artifactId>
-                    <version>2.12.1</version>
-                </plugin>
-                <!-- we cannot yet upgrade to v3.0.0-M1 due to https://issues.apache.org/jira/browse/MDEPLOY-271 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <configuration>
-                        <!-- do no longer create default checksums -->
-                        <createChecksum>false</createChecksum>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <dependencies>
-                        <!-- declare dependencies here rather than where needed to
-                             circumvent http://jira.codehaus.org/browse/MANTRUN-51
-                        -->
-                        <dependency>
-                            <groupId>org.apache.ant</groupId>
-                            <artifactId>ant-apache-regexp</artifactId>
-                            <version>1.7.1</version>
-                            <scope>runtime</scope>
-                        </dependency>
-                        <dependency>
-                            <groupId>jakarta-regexp</groupId>
-                            <artifactId>jakarta-regexp</artifactId>
-                            <version>1.4</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                <!-- only overwrite config for surefire/failsafe -->
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <configuration>
-                        <trimStackTrace>false</trimStackTrace>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <configuration>
-                        <trimStackTrace>false</trimStackTrace>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>maven-jspc-plugin</artifactId>
-                    <version>2.0.8</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>maven-jcrocm-plugin</artifactId>
-                    <version>2.0.4-incubator</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>slingstart-maven-plugin</artifactId>
-                    <version>1.8.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>1.7.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>ianal-maven-plugin</artifactId>
-                    <version>1.0-alpha-1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.groovy.maven</groupId>
-                    <artifactId>gmaven-plugin</artifactId>
-                    <version>1.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>animal-sniffer-maven-plugin</artifactId>
-                    <version>1.18</version>
-                    <configuration>
-                        <signature>
-                            <groupId>org.codehaus.mojo.signature</groupId>
-                            <artifactId>java1${sling.java.version}</artifactId>
-                            <version>1.0</version>
-                        </signature>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>emma-maven-plugin</artifactId>
-                    <version>1.0-alpha-3</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.3</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.servicemix.tooling</groupId>
-                    <artifactId>depends-maven-plugin</artifactId>
-                    <version>1.4.0</version>
-                    <executions>
-                        <execution>
-                            <id>generate-depends-file</id>
-                            <goals>
-                                <goal>generate-depends-file</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <!-- generate additional sha512 checksums for some attached artifacts (not supported by ASF parent pom yet, https://issues.apache.org/jira/browse/MPOM-244) -->
-                <plugin>
-                    <groupId>net.nicoulaj.maven.plugins</groupId>
-                    <artifactId>checksum-maven-plugin</artifactId>
-                    <version>1.10</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>artifacts</goal>
-                            </goals>
-                            <configuration>
-                                <algorithms>
-                                    <algorithm>SHA-512</algorithm>
-                                </algorithms>
-                                <!-- make sure to attach to also upload to staging repo (https://issues.apache.org/jira/browse/INFRA-14923) -->
-                                <attachChecksums>true</attachChecksums>
-                                <!-- generate additional SHA-512-checksums for source-release artifact -->
-                                <includeClassifiers>source-release</includeClassifiers>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -410,6 +255,146 @@
                 <artifactId>checksum-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!-- upgrade from 1.8.0 in ASF parent -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <!-- upgrade from 1.4.1 in ASF parent -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.0.0-M3</version>
+                </plugin>
+                <!-- upgrade from 3.0.1 in ASF parent -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
+                    <configuration>
+                        <stylesheet>maven</stylesheet>
+                        <excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</excludePackageNames>
+                        <!-- suppress timestamp for reproducible builds (https://issues.apache.org/jira/browse/MPOM-260) -->
+                        <notimestamp>true</notimestamp>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-changes-plugin</artifactId>
+                    <version>2.12.1</version>
+                </plugin>
+                <!-- upgrade from 2.5.2 in ASF parent -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                </plugin>
+                <!-- upgrade from 2.8.2 in ASF parent -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                    <configuration>
+                        <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
+                    </configuration>
+                </plugin>
+                <!-- only overwrite config for surefire/failsafe -->
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <trimStackTrace>false</trimStackTrace>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <configuration>
+                        <trimStackTrace>false</trimStackTrace>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>maven-jspc-plugin</artifactId>
+                    <version>2.0.8</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>slingstart-maven-plugin</artifactId>
+                    <version>1.9.12</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>1.8.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>ianal-maven-plugin</artifactId>
+                    <version>1.0-alpha-1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>1.20</version>
+                    <configuration>
+                        <signature>
+                            <groupId>org.codehaus.mojo.signature</groupId>
+                            <artifactId>java1${sling.java.version}</artifactId>
+                            <version>1.0</version>
+                        </signature>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.servicemix.tooling</groupId>
+                    <artifactId>depends-maven-plugin</artifactId>
+                    <version>1.4.0</version>
+                    <executions>
+                        <execution>
+                            <id>generate-depends-file</id>
+                            <goals>
+                                <goal>generate-depends-file</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- generate additional sha512 checksums for some attached artifacts (not supported by ASF parent pom yet, https://issues.apache.org/jira/browse/MPOM-244) -->
+                <plugin>
+                    <groupId>net.nicoulaj.maven.plugins</groupId>
+                    <artifactId>checksum-maven-plugin</artifactId>
+                    <version>1.10</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>artifacts</goal>
+                            </goals>
+                            <configuration>
+                                <algorithms>
+                                    <algorithm>SHA-512</algorithm>
+                                </algorithms>
+                                <!-- make sure to attach to also upload to staging repo (https://issues.apache.org/jira/browse/INFRA-14923) -->
+                                <attachChecksums>true</attachChecksums>
+                                <!-- generate additional SHA-512-checksums for source-release artifact -->
+                                <includeClassifiers>source-release</includeClassifiers>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
