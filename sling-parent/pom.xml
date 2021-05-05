@@ -392,6 +392,8 @@
                                 <goals>
                                     <goal>artifacts</goal>
                                 </goals>
+                                <!-- make sure this is executed prior maven-gpg-plugin:sign -->
+                                <phase>post-integration-test</phase>
                                 <configuration>
                                     <algorithms>
                                         <algorithm>SHA-512</algorithm>
