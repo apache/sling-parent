@@ -70,7 +70,6 @@
         <tag>sling-parent-reactor-41</tag>
     </scm>
 
-
     <reporting>
         <plugins>
             <plugin>
@@ -368,11 +367,70 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>net.nicoulaj.maven.plugins</groupId>
+                    <artifactId>checksum-maven-plugin</artifactId>
+                    <version>1.10.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
 
     <profiles>
+        <profile>
+            <id>apache-release</id>
+            <build>
+                <plugins>
+                    <!-- generate additional sha512 checksums for some attached artifacts (not supported by ASF parent pom yet, https://issues.apache.org/jira/browse/MPOM-244) -->
+                    <plugin>
+                        <groupId>net.nicoulaj.maven.plugins</groupId>
+                        <artifactId>checksum-maven-plugin</artifactId>
+                        <version>1.10</version>
+                        <executions>
+                            <execution>
+                                <id>source-release-attached-checksum</id>
+                                <goals>
+                                    <goal>artifacts</goal>
+                                </goals>
+                                <!-- make sure this is executed prior maven-gpg-plugin:sign -->
+                                <phase>post-integration-test</phase>
+                                <configuration>
+                                    <algorithms>
+                                        <algorithm>SHA-512</algorithm>
+                                    </algorithms>
+                                    <!-- make sure to attach to also upload to staging repo (https://issues.apache.org/jira/browse/INFRA-14923) -->
+                                    <attachChecksums>true</attachChecksums>
+                                    <!-- generate additional SHA-512-checksums for source-release artifact -->
+                                    <includeClassifiers>source-release</includeClassifiers>
+                                    <excludeMainArtifact>true</excludeMainArtifact>
+                                </configuration>
+                            </execution>
+                            <!-- disable execution from asf parent -->
+                            <execution>
+                                <id>source-release-checksum</id>
+                                <phase>invalid</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                              <id>sign-release-artifacts</id>
+                              <configuration>
+                                  <!-- don't sign SHA-512 checksums (in addition to default MD5 and SHA1) -->
+                                  <!-- This does not work in version 1.6 due to https://issues.apache.org/jira/browse/MGPG-66 -->
+                                  <excludes>
+                                      <exclude>**/*.sha512</exclude>
+                                  </excludes>
+                              </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>jacoco-report</id>
             <build>
