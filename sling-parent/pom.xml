@@ -299,6 +299,12 @@
                         <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
                     </configuration>
                 </plugin>
+                <!-- upgrade from 1.6 in ASF parent -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
                 <!-- only overwrite config for surefire/failsafe -->
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -413,18 +419,12 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <!-- execute signing after sha-512 checksum attachment-->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <executions>
                             <execution>
                               <id>sign-release-artifacts</id>
-                              <configuration>
-                                  <!-- don't sign SHA-512 checksums (in addition to default MD5 and SHA1) -->
-                                  <!-- This does not work in version 1.6 due to https://issues.apache.org/jira/browse/MGPG-66 -->
-                                  <excludes>
-                                      <exclude>**/*.sha512</exclude>
-                                  </excludes>
-                              </configuration>
                             </execution>
                         </executions>
                     </plugin>
