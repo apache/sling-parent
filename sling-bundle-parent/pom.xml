@@ -220,7 +220,7 @@ Bundle-DocURL: https://sling.apache.org
                 <scope>provided</scope>
             </dependency>
             <!-- individual OSGi spec API artifacts (preferred) -->
-            <!-- OSGi framework 1.8, Core R7 (https://osgi.org/javadoc/r7/core/org/osgi/framework/package-summary.html) -->
+            <!-- OSGi framework 1.8, Core R6 (https://osgi.org/javadoc/r6/core/org/osgi/framework/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.framework</artifactId>
