@@ -216,7 +216,7 @@ Bundle-DocURL: https://sling.apache.org
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.cmpn</artifactId>
-                <version>6.0.0</version>
+                <version>7.0.0</version>
                 <scope>provided</scope>
             </dependency>
             <!-- individual OSGi spec API artifacts (preferred) -->
@@ -249,11 +249,11 @@ Bundle-DocURL: https://sling.apache.org
                 <version>1.4.0</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- Event Admin 1.3.1, Compendium R6 (https://osgi.org/javadoc/r6/cmpn/org/osgi/service/event/package-summary.html) -->
+            <!-- Event Admin 1.4, Compendium R7 (https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/event/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.event</artifactId>
-                <version>1.3.1</version>
+                <version>1.4.0</version>
                 <scope>provided</scope>
             </dependency>
             <!-- OSGi annotations (OSGi R7) -->
@@ -261,7 +261,7 @@ Bundle-DocURL: https://sling.apache.org
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.annotation.versioning</artifactId>
-                <version>1.1.0</version>
+                <version>1.1.1</version>
                 <scope>provided</scope>
             </dependency>
             <!-- https://osgi.org/javadoc/osgi.annotation/7.0.0/org/osgi/annotation/bundle/package-frame.html -->
