@@ -225,19 +225,31 @@ Bundle-DocURL: https://sling.apache.org
                 <scope>provided</scope>
             </dependency>
             <!-- individual OSGi spec API artifacts (preferred) -->
-            <!-- OSGi framework 1.9, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/framework/package-summary.html) -->
+            <!-- Framework 1.9, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/framework/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.framework</artifactId>
                 <version>1.9.0</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- OSGi Tracker 1.5, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/util/tracker/package-summary.html) -->
+            <!-- Tracker 1.5, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/util/tracker/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.util.tracker</artifactId>
                 <version>1.5.3</version>
                 <scope>provided</scope>
+            </dependency>
+            <!-- Data Transfer Object 1.1, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/dto/package-summary.html) -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.dto</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <!-- URL Handlers 1.0, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/service/url/package-summary.html) -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.url</artifactId>
+                <version>1.0.0</version>
             </dependency>
             <!-- Configuration Admin 1.6, Compendium R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/cm/package-frame.html) -->
             <dependency>
