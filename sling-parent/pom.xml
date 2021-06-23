@@ -340,18 +340,6 @@
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>animal-sniffer-maven-plugin</artifactId>
-                    <version>1.20</version>
-                    <configuration>
-                        <signature>
-                            <groupId>org.codehaus.mojo.signature</groupId>
-                            <artifactId>java1${sling.java.version}</artifactId>
-                            <version>1.0</version>
-                        </signature>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>3.2.0</version>
                 </plugin>
@@ -550,6 +538,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>animal-sniffer-maven-plugin</artifactId>
+                        <version>1.20</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -557,6 +546,13 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <signature>
+                                <groupId>org.codehaus.mojo.signature</groupId>
+                                <artifactId>java18</artifactId>
+                                <version>1.0</version>
+                            </signature>
+                        </configuration>
                      </plugin>
                 </plugins>
             </build>
