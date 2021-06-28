@@ -431,6 +431,7 @@
                                     <goal>prepare-agent</goal>
                                 </goals>
                                 <configuration>
+                                    <append>true</append>
                                     <destFile>${project.build.directory}/jacoco-unit.exec</destFile>
                                 </configuration>
                             </execution>
@@ -440,6 +441,7 @@
                                     <goal>prepare-agent-integration</goal>
                                 </goals>
                                 <configuration>
+                                    <append>true</append>
                                     <destFile>${project.build.directory}/jacoco-it.exec</destFile>
                                 </configuration>
                             </execution>
