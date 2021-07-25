@@ -273,7 +273,6 @@
                     <version>3.2.0</version>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
                     <configuration>
-                        <stylesheet>maven</stylesheet>
                         <excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</excludePackageNames>
                         <!-- suppress timestamp for reproducible builds (https://issues.apache.org/jira/browse/MPOM-260) -->
                         <notimestamp>true</notimestamp>
