@@ -63,6 +63,7 @@
         <surefire.version>3.0.0-M4</surefire.version>
         <minimalMavenBuildVersion>3.3.9</minimalMavenBuildVersion>
         <minimalJavaBuildVersion>1.8</minimalJavaBuildVersion>
+        <javadoc.excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</javadoc.excludePackageNames>
     </properties>
 
     <scm>
@@ -258,8 +259,7 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
                     <configuration>
-                        <stylesheet>maven</stylesheet>
-                        <excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</excludePackageNames>
+                        <excludePackageNames>${javadoc.excludePackageNames}</excludePackageNames>
                     </configuration>
                 </plugin>
                 <plugin>
