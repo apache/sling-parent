@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>23</version>
+        <version>24</version>
         <relativePath />
     </parent>
 
@@ -61,6 +61,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <surefire.version>3.0.0-M4</surefire.version>
+        <minimalMavenBuildVersion>3.3.9</minimalMavenBuildVersion>
+        <minimalJavaBuildVersion>1.8</minimalJavaBuildVersion>
         <javadoc.excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</javadoc.excludePackageNames>
     </properties>
 
@@ -113,8 +115,7 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                      <execution>
-                        <!-- override execution id defined in ASF parent (not supported via property yet, https://issues.apache.org/jira/browse/MPOM-247) -->
-                        <id>enforce-maven-version</id>
+                        <id>enforce-sling-java-version</id>
                         <goals>
                           <goal>enforce</goal>
                         </goals>
@@ -127,13 +128,6 @@
                                         The value of the "sling.java.version" property should comply with the following pattern: ^(8|9|1[0-9])$.
                                     </regexMessage>
                                 </requireProperty>
-                                <requireJavaVersion>
-                                    <version>1.8.0</version>
-                                    <message>Apache Sling must be compiled with Java 8 or higher.</message>
-                                </requireJavaVersion>
-                                <requireMavenVersion>
-                                    <version>3.3.9</version>
-                                </requireMavenVersion>
                             </rules>
                         </configuration>
                     </execution>
@@ -196,7 +190,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.0-M4</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.release</groupId>
@@ -255,28 +248,18 @@
 
         <pluginManagement>
             <plugins>
-                <!-- upgrade from 1.8.0 in ASF parent -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
                 <!-- upgrade from 1.4.1 in ASF parent -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>3.0.0-M3</version>
                 </plugin>
-                <!-- upgrade from 3.0.1 in ASF parent -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.2.0</version>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
                     <configuration>
                         <excludePackageNames>${javadoc.excludePackageNames}</excludePackageNames>
-                        <!-- suppress timestamp for reproducible builds (https://issues.apache.org/jira/browse/MPOM-260) -->
-                        <notimestamp>true</notimestamp>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -298,12 +281,6 @@
                     <configuration>
                         <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
                     </configuration>
-                </plugin>
-                <!-- upgrade from 1.6 in ASF parent -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.0.1</version>
                 </plugin>
                 <!-- only overwrite config for surefire/failsafe -->
                 <plugin>
@@ -366,54 +343,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>apache-release</id>
-            <build>
-                <plugins>
-                    <!-- generate additional sha512 checksums for some attached artifacts (not supported by ASF parent pom yet, https://issues.apache.org/jira/browse/MPOM-244) -->
-                    <plugin>
-                        <groupId>net.nicoulaj.maven.plugins</groupId>
-                        <artifactId>checksum-maven-plugin</artifactId>
-                        <version>1.10</version>
-                        <executions>
-                            <execution>
-                                <id>source-release-attached-checksum</id>
-                                <goals>
-                                    <goal>artifacts</goal>
-                                </goals>
-                                <!-- make sure this is executed prior maven-gpg-plugin:sign -->
-                                <phase>post-integration-test</phase>
-                                <configuration>
-                                    <algorithms>
-                                        <algorithm>SHA-512</algorithm>
-                                    </algorithms>
-                                    <!-- make sure to attach to also upload to staging repo (https://issues.apache.org/jira/browse/INFRA-14923) -->
-                                    <attachChecksums>true</attachChecksums>
-                                    <!-- generate additional SHA-512-checksums for source-release artifact -->
-                                    <includeClassifiers>source-release</includeClassifiers>
-                                    <excludeMainArtifact>true</excludeMainArtifact>
-                                </configuration>
-                            </execution>
-                            <!-- disable execution from asf parent -->
-                            <execution>
-                                <id>source-release-checksum</id>
-                                <phase>invalid</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <!-- execute signing after sha-512 checksum attachment-->
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                              <id>sign-release-artifacts</id>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
         <profile>
             <id>jacoco-report</id>
             <build>
@@ -926,6 +855,18 @@
                                             <descriptorRef>${sourceReleaseAssemblyDescriptor}</descriptorRef>
                                         </descriptorRefs>
                                         <tarLongFileMode>posix</tarLongFileMode>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-enforcer-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>enforce-output-timestamp-property</id>
+                                    <configuration>
+                                        <skip>true</skip>
                                     </configuration>
                                 </execution>
                             </executions>
