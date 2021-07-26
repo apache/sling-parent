@@ -260,6 +260,7 @@
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
                     <configuration>
                         <excludePackageNames>${javadoc.excludePackageNames}</excludePackageNames>
+                        <source>${sling.java.version}</source>
                     </configuration>
                 </plugin>
                 <plugin>
