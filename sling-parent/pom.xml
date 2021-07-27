@@ -458,8 +458,8 @@
             </activation>
             <properties>
                 <!-- this affects m-compiler-p and m-javadoc-p -->
-                <maven.compiler.source>${java.target.version}</maven.compiler.source>
-                <maven.compiler.target>${java.target.version}</maven.compiler.target>
+                <maven.compiler.source>${sling.java.version}</maven.compiler.source>
+                <maven.compiler.target>${sling.java.version}</maven.compiler.target>
             </properties>
             <build>
                 <plugins>
@@ -496,7 +496,7 @@
                  release sets API classpath, source and target, see 
                  https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
                  and http://openjdk.java.net/jeps/247, this affects m-compiler-p and m-javadoc-p -->
-                <maven.compiler.release>${java.target.version}</maven.compiler.release>
+                <maven.compiler.release>${sling.java.version}</maven.compiler.release>
             </properties>
         </profile>
         <!-- This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
