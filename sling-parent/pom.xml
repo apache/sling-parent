@@ -260,7 +260,6 @@
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
                     <configuration>
                         <excludePackageNames>${javadoc.excludePackageNames}</excludePackageNames>
-                        <source>${sling.java.version}</source>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -457,16 +456,13 @@
             <activation>
                 <jdk>1.8</jdk>
             </activation>
+            <properties>
+                <!-- this affects m-compiler-p and m-javadoc-p -->
+                <maven.compiler.source>${java.target.version}</maven.compiler.source>
+                <maven.compiler.target>${java.target.version}</maven.compiler.target>
+            </properties>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <source>1.8</source>
-                            <target>1.8</target>
-                        </configuration>
-                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>animal-sniffer-maven-plugin</artifactId>
@@ -495,21 +491,13 @@
                 <!-- syntax according to http://maven.apache.org/enforcer/enforcer-rules/versionRanges.html -->
                 <jdk>[9,)</jdk>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <!-- 
-                            release sets API classpath, source and target, see 
-                            https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
-                            and http://openjdk.java.net/jeps/247 -->
-                            <release>${sling.java.version}</release>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                 <!-- 
+                 release sets API classpath, source and target, see 
+                 https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
+                 and http://openjdk.java.net/jeps/247, this affects m-compiler-p and m-javadoc-p -->
+                <maven.compiler.release>${java.target.version}</maven.compiler.release>
+            </properties>
         </profile>
         <!-- This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
         <profile>
