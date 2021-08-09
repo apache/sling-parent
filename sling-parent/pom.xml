@@ -868,6 +868,25 @@
 
     <mailingLists>
         <mailingList>
+            <name>Apache Sling Users List</name>
+            <subscribe>
+                users-subscribe@sling.apache.org
+            </subscribe>
+            <unsubscribe>
+                users-unsubscribe@sling.apache.org
+            </unsubscribe>
+            <!-- to prevent scraping just point to Sling websites, which contains hints how to post -->
+            <post>https://sling.apache.org/project-information.html#mailing-lists</post>
+            <archive>
+                https://lists.apache.org/list.html?users@sling.apache.org
+            </archive>
+            <otherArchives>
+                <otherArchive>
+                    https://www.mail-archive.com/users@sling.apache.org/
+                </otherArchive>
+            </otherArchives>
+        </mailingList>
+        <mailingList>
             <name>Apache Sling Development List</name>
             <subscribe>
                 dev-subscribe@sling.apache.org
@@ -875,14 +894,12 @@
             <unsubscribe>
                 dev-unsubscribe@sling.apache.org
             </unsubscribe>
-            <post>dev at sling.apache.org</post>
+            <!-- to prevent scraping just point to Sling websites, which contains hints how to post -->
+            <post>https://sling.apache.org/project-information.html#mailing-lists</post>
             <archive>
-                https://mail-archives.apache.org/mod_mbox/sling-dev/
+                https://lists.apache.org/list.html?dev@sling.apache.org
             </archive>
             <otherArchives>
-                <otherArchive>
-                    https://sling-dev.markmail.org/
-                </otherArchive>
                 <otherArchive>
                     https://www.mail-archive.com/dev@sling.apache.org/
                 </otherArchive>
