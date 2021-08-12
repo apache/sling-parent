@@ -1004,15 +1004,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <distributionManagement>
-        <site>
-            <id>apache.sling.site</id>
-            <url>
-                scp://people.apache.org/www/sling.apache.org/generated
-            </url>
-        </site>
-    </distributionManagement>
-
     <pluginRepositories>
         <pluginRepository>
             <id>apache.snapshots</id>
