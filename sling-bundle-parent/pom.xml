@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling</artifactId>
-        <version>45-SNAPSHOT</version>
+        <version>45</version>
         <relativePath>../sling-parent</relativePath>
     </parent>
 
@@ -36,7 +36,7 @@
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=sling-parent.git</url>
-        <tag>HEAD</tag>
+        <tag>sling-parent-reactor-45</tag>
     </scm>
 
     <properties>
