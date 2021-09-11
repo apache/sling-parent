@@ -255,9 +255,11 @@
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
+                <!-- update from 3.3.0 in ASF Parent, remove version again when upgrading to ASF Parent 25 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.3.1</version>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
                     <configuration>
                         <excludePackageNames>${javadoc.excludePackageNames}</excludePackageNames>
