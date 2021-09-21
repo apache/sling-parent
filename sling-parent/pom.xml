@@ -151,8 +151,8 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>ianal-maven-plugin</artifactId>
+                <groupId>org.apache.geronimo.genesis.plugins</groupId>
+                <artifactId>tools-maven-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>verify-legal-files</id>
@@ -319,10 +319,14 @@
                     <artifactId>cargo-maven2-plugin</artifactId>
                     <version>1.8.3</version>
                 </plugin>
+                <!-- 
+                    Documentation: https://geronimo.apache.org/maven/genesis/plugins/tools-maven-plugin/usage.html
+                    Source code: https://svn.apache.org/repos/asf/geronimo/genesis/tags/genesis-1.4/plugins/tools-maven-plugin/
+                    -->
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>ianal-maven-plugin</artifactId>
-                    <version>1.0-alpha-1</version>
+                    <groupId>org.apache.geronimo.genesis.plugins</groupId>
+                    <artifactId>tools-maven-plugin</artifactId>
+                    <version>1.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
