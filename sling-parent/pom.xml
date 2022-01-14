@@ -77,7 +77,6 @@
     <reporting>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <!-- configuration set in build->pluginMgmt -->
                 <reportSets>
@@ -89,11 +88,9 @@
                 </reportSets>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
                 <reportSets>
                     <reportSet>
@@ -112,7 +109,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                      <execution>
@@ -137,7 +133,6 @@
 
             <!-- Attach sources for all builds -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <inherited>true</inherited>
                 <executions>
@@ -189,13 +184,12 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.release</groupId>
                         <artifactId>maven-release-oddeven-policy</artifactId>
-                        <version>3.0.0-M4</version>
+                        <version>3.0.0-M5</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -249,15 +243,28 @@
 
         <pluginManagement>
             <plugins>
+                <!-- upgrade from 3.2.0 in ASF parent -->
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.2</version>
+                </plugin>
+                <!-- upgrade from 3.8.1 in ASF parent -->
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.9.0</version>
+                </plugin>
+                <!-- upgrade from 3.8.1 in ASF parent -->
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                </plugin>
                 <!-- upgrade from 1.4.1 in ASF parent -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
                 <!-- update from 3.3.0 in ASF Parent, remove version again when upgrading to ASF Parent 25 -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.3.1</version>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
@@ -266,21 +273,18 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-changes-plugin</artifactId>
                     <version>2.12.1</version>
                 </plugin>
                 <!-- upgrade from 2.5.2 in ASF parent -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>3.0.0-M1</version>
                 </plugin>
                 <!-- upgrade from 2.8.2 in ASF parent -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.0.0-M2</version>
                     <configuration>
                         <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
                     </configuration>
@@ -298,8 +302,10 @@
                         <trimStackTrace>false</trimStackTrace>
                     </configuration>
                 </plugin>
+                <!-- upgrade from 3.9.1 in ASF parent -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
+                    <version>3.10.0</version>
                     <configuration>
                         <relativizeDecorationLinks>false</relativizeDecorationLinks>
                     </configuration>
@@ -317,7 +323,7 @@
                 <plugin>
                     <groupId>org.codehaus.cargo</groupId>
                     <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>1.8.3</version>
+                    <version>1.9.0</version>
                 </plugin>
                 <!-- 
                     Documentation: https://geronimo.apache.org/maven/genesis/plugins/tools-maven-plugin/usage.html
@@ -331,7 +337,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
