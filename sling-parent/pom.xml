@@ -62,6 +62,7 @@
         <surefire.version>3.0.0-M4</surefire.version>
         <minimalMavenBuildVersion>3.3.9</minimalMavenBuildVersion>
         <minimalJavaBuildVersion>1.8</minimalJavaBuildVersion>
+        <maven.plugin.tools.version>3.6.4</maven.plugin.tools.version><!-- version used for modules of https://maven.apache.org/plugin-tools/index.html -->
         <!-- the github id used for the ribbon for Maven sites: https://maven.apache.org/skins/maven-fluido-skin/#GitHub_ribbons -->
         <github.project.id>apache/sling-dummyproject</github.project.id>
         <javadoc.excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</javadoc.excludePackageNames>
@@ -288,6 +289,11 @@
                     <configuration>
                         <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
                     </configuration>
+                </plugin>
+                <!-- upgrade from 3.6.1 in ASF parent -->
+                <plugin>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>${maven.plugin.tools.version}</version>
                 </plugin>
                 <!-- only overwrite config for surefire/failsafe -->
                 <plugin>
@@ -998,6 +1004,14 @@
                 <artifactId>annotations</artifactId>
                 <version>16.0.2</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- Annotations used in Maven Plugins -->
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <version>${maven.plugin.tools.version}</version>
+                <scope>provided</scope> <!-- annotations are not used at runtime because @Retention(value=CLASS), they are needed only to build the plugin -->
             </dependency>
 
             <!-- Basic dependencies for Unit Tests -->
