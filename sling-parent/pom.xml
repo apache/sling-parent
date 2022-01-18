@@ -254,7 +254,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.9.0</version>
                 </plugin>
-                <!-- upgrade from 3.8.1 in ASF parent -->
+                <!-- upgrade from 3.0.0-M4 in ASF parent -->
                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>3.0.0-M5</version>
