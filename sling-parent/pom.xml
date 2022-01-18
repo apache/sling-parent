@@ -59,7 +59,7 @@
         <sling.java.version>8</sling.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <surefire.version>3.0.0-M4</surefire.version>
+        <surefire.version>3.0.0-M5</surefire.version>
         <minimalMavenBuildVersion>3.3.9</minimalMavenBuildVersion>
         <minimalJavaBuildVersion>1.8</minimalJavaBuildVersion>
         <maven.plugin.tools.version>3.6.4</maven.plugin.tools.version><!-- version used for modules of https://maven.apache.org/plugin-tools/index.html -->
