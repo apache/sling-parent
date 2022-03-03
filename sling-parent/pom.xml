@@ -971,11 +971,11 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- JetBrains annotations for null-analysis (SLING-7798) -->
+            <!-- JetBrains annotations for null-analysis (SLING-7798), https://github.com/JetBrains/java-annotations -->
             <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
-                <version>16.0.2</version>
+                <version>23.0.0</version>
                 <scope>provided</scope>
             </dependency>
 
