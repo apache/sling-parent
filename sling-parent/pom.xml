@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>24</version>
+        <version>25</version>
         <relativePath />
     </parent>
 
@@ -244,30 +244,16 @@
 
         <pluginManagement>
             <plugins>
-                <!-- upgrade from 3.2.0 in ASF parent -->
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
-                </plugin>
-                <!-- upgrade from 3.8.1 in ASF parent -->
+                
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.9.0</version>
+                    <configuration>
+                    	<!-- workaround for https://issues.apache.org/jira/browse/MCOMPILER-485 -->
+                    	<createMissingPackageInfoClass>false</createMissingPackageInfoClass>
+                    </configuration>
                 </plugin>
-                <!-- upgrade from 3.0.0-M4 in ASF parent -->
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>3.0.0-M5</version>
-                </plugin>
-                <!-- upgrade from 1.4.1 in ASF parent -->
-                <plugin>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <!-- update from 3.3.0 in ASF Parent, remove version again when upgrading to ASF Parent 25 -->
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.1</version>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
                     <configuration>
                         <excludePackageNames>${javadoc.excludePackageNames}</excludePackageNames>
@@ -290,11 +276,6 @@
                         <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
                     </configuration>
                 </plugin>
-                <!-- upgrade from 3.6.1 in ASF parent -->
-                <plugin>
-                    <artifactId>maven-plugin-plugin</artifactId>
-                    <version>${maven.plugin.tools.version}</version>
-                </plugin>
                 <!-- only overwrite config for surefire/failsafe -->
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -306,14 +287,6 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <configuration>
                         <trimStackTrace>false</trimStackTrace>
-                    </configuration>
-                </plugin>
-                <!-- upgrade from 3.9.1 in ASF parent -->
-                <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.10.0</version>
-                    <configuration>
-                        <relativizeDecorationLinks>false</relativizeDecorationLinks>
                     </configuration>
                 </plugin>
                 <plugin>
