@@ -244,13 +244,10 @@
 
         <pluginManagement>
             <plugins>
-                
+                <!-- upgrade from 3.10.0 in ASF parent -->
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                    	<!-- workaround for https://issues.apache.org/jira/browse/MCOMPILER-485 -->
-                    	<createMissingPackageInfoClass>false</createMissingPackageInfoClass>
-                    </configuration>
+                    <version>3.10.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
