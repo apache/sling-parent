@@ -55,14 +55,9 @@
                     <groupId>biz.aQute.bnd</groupId>
                     <artifactId>bnd-maven-plugin</artifactId>
                     <version>${bnd.version}</version>
-                    <executions>
-                        <execution>
-                            <id>bnd-process</id>
-                            <goals>
-                                <goal>bnd-process</goal>
-                            </goals>
-                            <configuration>
-                                <bnd><![CDATA[
+                    <extensions>true</extensions>
+                    <configuration>
+                        <bnd><![CDATA[
 # a lot of bundle header are generated from pom elements by default: https://github.com/bndtools/bnd/tree/master/maven/bnd-maven-plugin#default-bundle-headers
 Bundle-Category: sling
 
@@ -82,8 +77,20 @@ Bundle-DocURL: https://sling.apache.org
 -fixupmessages:"Export *,  has \\d+,  private references"; \
     restrict:=warning; \
     is:=error
-                                ]]></bnd>
-                            </configuration>
+                        ]]></bnd>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>bnd-process</id>
+                            <goals>
+                                <goal>bnd-process</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>bnd-jar</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
@@ -107,14 +114,6 @@ Bundle-DocURL: https://sling.apache.org
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <archive>
-                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        </archive>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
