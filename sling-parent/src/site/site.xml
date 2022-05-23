@@ -24,7 +24,7 @@ under the License.
     <skin>
         <groupId>org.apache.maven.skins</groupId>
         <artifactId>maven-fluido-skin</artifactId>
-        <version>1.9</version>
+        <version>1.11.0</version>
     </skin>
     <version position="right"/>
     <publishDate position="right"/>
@@ -32,8 +32,8 @@ under the License.
         <name>Apache Sling</name>
         <src>https://sling.apache.org/res/logos/sling.svg</src>
         <href>https://sling.apache.org/</href>
-        <height>63</height>
-        <width>123</width>
+        <height>63px</height>
+        <width>123px</width>
     </bannerLeft>
     <bannerRight>
         <name>Apache</name>
@@ -46,6 +46,11 @@ under the License.
             <item name="Apache Sling" href="https://sling.apache.org/"/>
             <item name="Maven Plugins" href="https://sling.apache.org/components/"/>
         </breadcrumbs>
+        <footer><![CDATA[
+<p>&#169; $date.get('yyyy')
+<a href="https://www.apache.org/">The Apache Software Foundation</a> &vert; <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+</p>
+       ]]></footer>
     </body>
     <custom>
         <fluidoSkin>
@@ -56,5 +61,14 @@ under the License.
               <ribbonColor>gray</ribbonColor>
             </gitHub>
         </fluidoSkin>
+        <matomo>
+            <siteId>6</siteId>
+            <url>https://analytics.apache.org</url>
+            <options>
+                <disableCookies/>
+                <trackPageView/>
+                <enableLinkTracking/>
+            </options>
+        </matomo>
     </custom>
 </project>
