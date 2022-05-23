@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>25</version>
+        <version>26</version>
         <relativePath />
     </parent>
 
@@ -244,11 +244,7 @@
 
         <pluginManagement>
             <plugins>
-                <!-- upgrade from 3.10.0 in ASF parent -->
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.1</version>
-                </plugin>
+                
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
@@ -260,15 +256,8 @@
                     <artifactId>maven-changes-plugin</artifactId>
                     <version>2.12.1</version>
                 </plugin>
-                <!-- upgrade from 2.5.2 in ASF parent -->
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>3.0.0-M1</version>
-                </plugin>
-                <!-- upgrade from 2.8.2 in ASF parent -->
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M2</version>
                     <configuration>
                         <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
                     </configuration>
