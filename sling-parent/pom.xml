@@ -275,8 +275,10 @@
                         <trimStackTrace>false</trimStackTrace>
                     </configuration>
                 </plugin>
+                <!-- update from 3.11.0 managed in ASF parent -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
+                    <version>3.12.0</version>
                     <configuration>
                         <relativizeDecorationLinks>false</relativizeDecorationLinks><!-- leave absolute URLs untouched, like image urls in header: https://maven.apache.org/plugins/maven-site-plugin/site-mojo.html#relativizeDecorationLinks -->
                     </configuration>
