@@ -244,7 +244,6 @@
 
         <pluginManagement>
             <plugins>
-                
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
