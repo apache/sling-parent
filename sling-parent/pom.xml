@@ -879,6 +879,139 @@
                 </pluginManagement>
             </build>
         </profile>
+        <profile>
+            <!--
+                This profile enables execution of the Sling Starter ITs on top of the specified
+                Starter version. It is designed to include the current version of the bundle as an override
+                so that the tests are executed against the version of the bundle being built.
+            -->
+            <id>run-starter-its</id>
+            <activation>
+                <property>
+                    <!-- the version of the Starter and Starter ITs to run, e.g. 12 or 13-SNAPSHOT -->
+                    <name>it.starter.version</name>
+                </property>
+            </activation>
+            <properties>
+                <it.startTimeoutSeconds>120</it.startTimeoutSeconds>
+            </properties>
+            <dependencies>
+                <dependency>
+                     <groupId>org.apache.sling</groupId>
+                     <artifactId>org.apache.sling.launchpad.integration-tests</artifactId>
+                     <version>${it.starter.version}</version>
+                     <scope>test</scope>
+                     <!-- TODO - the integration tests should not depend on the SCR annotations -->
+                     <exclusions>
+                         <exclusion>
+                             <groupId>org.apache.felix</groupId>
+                             <artifactId>org.apache.felix.scr.annotations</artifactId>
+                         </exclusion>
+                     </exclusions>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <!-- reserve network ports for the integration tests -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>reserve-network-port</id>
+                                <goals>
+                                    <goal>reserve-network-port</goal>
+                                </goals>
+                                <phase>pre-integration-test</phase>
+                                <configuration>
+                                    <portNames>
+                                        <portName>http.port</portName>
+                                    </portNames>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- launch the Sling instances to test; only oak-tar -->
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>feature-launcher-maven-plugin</artifactId>
+                        <version>0.1.3-SNAPSHOT</version>
+                        <configuration>
+                            <launches>
+                                <launch>
+                                    <id>sling-starter-oak-tar</id>
+                                    <!-- Include the bundle currently being built -->
+                                    <additionalBundles>
+                                        <additionalBundle>${project.groupId}:${project.artifactId}:${project.version}</additionalBundle>
+                                    </additionalBundles>
+                                    <feature>
+                                        <groupId>org.apache.sling</groupId>
+                                        <artifactId>org.apache.sling.starter</artifactId>
+                                        <version>${it.starter.version}</version>
+                                        <classifier>oak_tar_test</classifier>
+                                        <type>slingosgifeature</type>
+                                    </feature>
+                                    <launcherArguments>
+                                        <frameworkProperties>
+                                            <org.osgi.service.http.port>${http.port}</org.osgi.service.http.port>
+                                        </frameworkProperties>
+                                    </launcherArguments>
+                                    <startTimeoutSeconds>${it.startTimeoutSeconds}</startTimeoutSeconds>
+                                </launch>
+                            </launches>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>start</goal>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- run the ITs -->
+                    <plugin>
+                       <artifactId>maven-failsafe-plugin</artifactId>
+                       <executions>
+                           <execution>
+                               <goals>
+                                   <goal>integration-test</goal>
+                                   <goal>verify</goal>
+                               </goals>
+                           </execution>
+                       </executions>
+                       <configuration>
+                           <dependenciesToScan>
+                               <dependency>org.apache.sling:org.apache.sling.launchpad.integration-tests</dependency>
+                           </dependenciesToScan>
+                            <includes>
+                                <include>**/*Test.java</include>
+                                <include>**/*IT.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>${failsafe.exclude}</exclude>
+                                <!-- Don't run provisioning model ITs in the feature model context -->
+                                <exclude>org/apache/sling/launchpad/webapp/integrationtest/provisioning/**.java</exclude>
+                            </excludes>
+                           <systemPropertyVariables>
+                               <launchpad.http.server.url>http://localhost:${http.port}/</launchpad.http.server.url>
+                               <starter.http.test.ports>false:${http.port}</starter.http.test.ports>
+                               <starter.min.bundles.count>100</starter.min.bundles.count>
+                               <!-- Comma-separated list of paths to check for 200 status (added for SLING-10402) -->
+                               <starter.check.paths>
+                                    /slingshot/users/slingshot1/travel/home/images/home.jpg,
+                                    /slingshot/resources/images/background.jpg,
+                                    /slingshot/users/slingshot2/places/landing/images/landing.jpg,
+                                    /starter.html,
+                                    /bin/browser.html,
+                                    /system/console/bundles,
+                                </starter.check.paths>
+                           </systemPropertyVariables>
+                       </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <mailingLists>
