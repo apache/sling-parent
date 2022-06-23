@@ -248,6 +248,12 @@ Bundle-DocURL: https://sling.apache.org
                 <artifactId>org.osgi.service.url</artifactId>
                 <version>1.0.1</version>
             </dependency>
+            <!-- Resource API 1.0, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/resource/package-summary.html)  -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.resource</artifactId>
+                <version>1.0.1</version>
+            </dependency>
             <!-- Configuration Admin 1.6, Compendium R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/cm/package-frame.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
