@@ -212,14 +212,12 @@ Bundle-DocURL: https://sling.apache.org
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.core</artifactId>
                 <version>7.0.0</version>
-                <scope>provided</scope>
             </dependency>
             <!-- Compendium R6 -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.cmpn</artifactId>
                 <version>7.0.0</version>
-                <scope>provided</scope>
             </dependency>
             <!-- individual OSGi spec API artifacts (preferred) -->
             <!-- Framework 1.9, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/framework/package-summary.html) -->
@@ -227,14 +225,12 @@ Bundle-DocURL: https://sling.apache.org
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.framework</artifactId>
                 <version>1.9.0</version>
-                <scope>provided</scope>
             </dependency>
             <!-- Tracker 1.5, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/util/tracker/package-summary.html) -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.util.tracker</artifactId>
                 <version>1.5.4</version>
-                <scope>provided</scope>
             </dependency>
             <!-- Data Transfer Object 1.1, Core R7 (https://docs.osgi.org/javadoc/osgi.core/7.0.0/org/osgi/dto/package-summary.html) -->
             <dependency>
@@ -259,7 +255,6 @@ Bundle-DocURL: https://sling.apache.org
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.cm</artifactId>
                 <version>1.6.1</version>
-                <scope>provided</scope>
             </dependency>
             <!-- Service Component 1.4, Compendium R7 (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/package-frame.html) -->
             <!-- and component property types (https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/propertytypes/package-frame.html) -->
@@ -267,7 +262,6 @@ Bundle-DocURL: https://sling.apache.org
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.component</artifactId>
                 <version>1.4.0</version>
-                <scope>provided</scope>
             </dependency>
             <!-- Event Admin 1.4, Compendium R7 (https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/event/package-summary.html) -->
             <dependency>
@@ -282,35 +276,30 @@ Bundle-DocURL: https://sling.apache.org
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.annotation.versioning</artifactId>
                 <version>1.1.2</version>
-                <scope>provided</scope>
             </dependency>
             <!-- https://osgi.org/javadoc/osgi.annotation/7.0.0/org/osgi/annotation/bundle/package-frame.html -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.annotation.bundle</artifactId>
                 <version>1.0.0</version>
-                <scope>provided</scope>
             </dependency>
             <!-- https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/component/annotations/package-frame.html -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.component.annotations</artifactId>
                 <version>1.4.0</version>
-                <scope>provided</scope>
             </dependency>
             <!-- https://osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/metatype/annotations/package-frame.html -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.metatype.annotations</artifactId>
                 <version>1.4.1</version>
-                <scope>provided</scope>
             </dependency>
             <!-- https://sling.apache.org/apidocs/sling11/org/apache/sling/servlets/annotations/package-summary.html -->
             <dependency>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>org.apache.sling.servlets.annotations</artifactId>
                 <version>1.2.6</version>
-                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
