@@ -268,7 +268,18 @@ Bundle-DocURL: https://sling.apache.org
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.service.event</artifactId>
                 <version>1.4.1</version>
-                <scope>provided</scope>
+            </dependency>
+            <!-- HTTP Service 1.2, Compendium R7 (https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/http/package-summary.html) -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.http</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+            <!-- HTTP Whiteboard 1.1, Compendium R7 (https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/service/http/context/package-summary.html) -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.http.whiteboard</artifactId>
+                <version>1.1.1</version>
             </dependency>
             <!-- OSGi annotations (OSGi R7) -->
             <!-- https://osgi.org/javadoc/osgi.annotation/7.0.0/org/osgi/annotation/versioning/package-frame.html -->
