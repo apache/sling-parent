@@ -960,6 +960,7 @@
                                 <goals>
                                     <goal>attach-features</goal>
                                     <goal>aggregate-features</goal>
+                                    <goal>analyse-features</goal>
                                 </goals>
                                 <configuration>
                                     <aggregates>
@@ -982,6 +983,11 @@
                                             </artifactsOverrides>
                                         </aggregate>
                                     </aggregates>
+                                    <scans>
+                                        <scan>
+                                            <includeClassifier>testing_oak_tar</includeClassifier>
+                                        </scan>
+                                    </scans>
                                 </configuration>
                             </execution>
                         </executions>
