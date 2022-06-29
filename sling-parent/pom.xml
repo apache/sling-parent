@@ -958,8 +958,8 @@
                                 <id>aggregate-features</id>
                                 <phase>prepare-package</phase>
                                 <goals>
-                                    <goal>attach-features</goal>
                                     <goal>aggregate-features</goal>
+                                    <goal>attach-features</goal>
                                     <goal>analyse-features</goal>
                                 </goals>
                                 <configuration>
@@ -1001,7 +1001,7 @@
                             <launches>
                                 <launch>
                                     <id>sling-starter-oak-tar</id>
-                                    <!-- Include the feature previously aggregated built -->
+                                    <!-- Include the feature previously aggregated -->
                                     <feature>
                                         <groupId>${project.groupId}</groupId>
                                         <artifactId>${project.artifactId}</artifactId>
