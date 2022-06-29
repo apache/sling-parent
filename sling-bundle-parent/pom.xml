@@ -156,6 +156,13 @@ Bundle-DocURL: https://sling.apache.org
                                     </excludes>
                                     <message>Please change all occurrences of maven-sling-plugin to sling-maven-plugin (plugin was renamed).</message>
                                 </bannedPlugins>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>org.osgi:osgi.core</exclude>
+                                        <exclude>org.osgi:osgi.cmpn</exclude>
+                                    </excludes>
+                                    <message>Use the individual OSGi chapter dependencies instead of the aggregate ones. Further infos at http://docs.osgi.org/artifacts/#aggregate-artifacts.</message>
+                                </bannedDependencies>
                             </rules>
                         </configuration>
                     </execution>
@@ -213,7 +220,7 @@ Bundle-DocURL: https://sling.apache.org
                 <artifactId>osgi.core</artifactId>
                 <version>7.0.0</version>
             </dependency>
-            <!-- Compendium R6 -->
+            <!-- Compendium R7 -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.cmpn</artifactId>
