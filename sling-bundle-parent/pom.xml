@@ -40,7 +40,7 @@
     </scm>
 
     <properties>
-        <bnd.version>6.3.0</bnd.version>
+        <bnd.version>6.3.1</bnd.version>
     </properties>
 
     <build>
@@ -93,7 +93,6 @@ Bundle-DocURL: https://sling.apache.org
                     <version>${bnd.version}</version>
                     <configuration>
                         <includeDistributionManagement>false</includeDistributionManagement>
-                        <fullReport>true</fullReport>
                         <diffignores>
                             <!-- ignore Bundle-Version header for baseline, i.e. no enforcement of specific bundle versions -->
                             <diffignore>Bundle-Version</diffignore>
