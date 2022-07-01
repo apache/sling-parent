@@ -293,6 +293,37 @@ Bundle-DocURL: https://sling.apache.org
                 <artifactId>org.osgi.service.log</artifactId>
                 <version>1.4.0</version>
             </dependency>
+            <!-- OSGi Common Namespaces (OSGi R7 Compendium, http://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html) -->
+            <!-- https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/namespace/contract/package-summary.html -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.namespace.contract</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <!-- https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/namespace/extender/package-summary.html -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.namespace.extender</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+            <!-- https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/namespace/implementation/package-summary.html -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.namespace.implementation</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <!-- https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/namespace/service/package-summary.html -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.namespace.service</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <!-- https://docs.osgi.org/javadoc/osgi.cmpn/7.0.0/org/osgi/namespace/unresolvable/package-summary.html -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.namespace.unresolvable</artifactId>
+                <version>1.0.0</version>
+            </dependency>
             <!-- OSGi annotations (OSGi R7) -->
             <!-- https://osgi.org/javadoc/osgi.annotation/7.0.0/org/osgi/annotation/versioning/package-frame.html -->
             <dependency>
