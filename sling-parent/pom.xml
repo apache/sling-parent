@@ -879,6 +879,208 @@
                 </pluginManagement>
             </build>
         </profile>
+        <profile>
+            <!--
+                This profile enables execution of the Sling Starter ITs on top of the specified
+                Starter version. It is designed to include the current version of the bundle as an override
+                so that the tests are executed against the version of the bundle being built.
+            -->
+            <id>starter-its</id>
+            <activation>
+                <property>
+                    <!-- the version of the Starter and Starter ITs to run, e.g. 12 or 13-SNAPSHOT -->
+                    <name>starter-its.starter.version</name>
+                </property>
+            </activation>
+            <properties>
+                <it.startTimeoutSeconds>120</it.startTimeoutSeconds>
+            </properties>
+            <dependencies>
+                <dependency>
+                     <groupId>org.apache.sling</groupId>
+                     <artifactId>org.apache.sling.launchpad.integration-tests</artifactId>
+                     <version>${starter-its.starter.version}</version>
+                     <scope>test</scope>
+                     <!--
+                        Remove various banned dependencies. These should be gradually removed from the integration-tests
+                        module.
+                    -->
+                     <exclusions>
+                         <exclusion>
+                             <groupId>org.apache.felix</groupId>
+                             <artifactId>org.apache.felix.scr.annotations</artifactId>
+                         </exclusion>
+                         <exclusion>
+                             <groupId>org.osgi</groupId>
+                             <artifactId>osgi.core</artifactId>
+                         </exclusion>
+                         <exclusion>
+                             <groupId>org.osgi</groupId>
+                             <artifactId>osgi.cmpn</artifactId>
+                         </exclusion>
+                     </exclusions>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <!-- reserve network ports for the integration tests -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>reserve-network-port</id>
+                                <goals>
+                                    <goal>reserve-network-port</goal>
+                                </goals>
+                                <phase>pre-integration-test</phase>
+                                <configuration>
+                                    <portNames>
+                                        <portName>starter-its.http.port</portName>
+                                    </portNames>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>slingfeature-maven-plugin</artifactId>
+                        <version>1.6.4</version>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <id>create-current-artifact-feature</id>
+                                <goals>
+                                    <goal>include-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <includeArtifactClassifier>current-artifact-feature</includeArtifactClassifier>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>aggregate-features</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>aggregate-features</goal>
+                                    <goal>attach-features</goal>
+                                    <goal>analyse-features</goal>
+                                </goals>
+                                <configuration>
+                                    <aggregates>
+                                        <aggregate>
+                                            <!-- aggregate the Sling Starter with the additional testing files from this module -->
+                                            <classifier>testing_oak_tar</classifier>
+                                            <!-- depend on the exact same Slingstart version -->
+                                            <includeArtifact>
+                                                <groupId>org.apache.sling</groupId>
+                                                <artifactId>org.apache.sling.starter</artifactId>
+                                                <version>${starter-its.starter.version}</version>
+                                                <classifier>oak_tar_test</classifier>
+                                                <type>slingosgifeature</type>
+                                            </includeArtifact>
+                                            <includeClassifier>current-artifact-feature</includeClassifier>
+                                            <!-- To apply the same override rule for all clashes, a wildcard using '*' for
+                                                 groupID and artifactID can be used; this can be used as a catch all --> 
+                                            <artifactsOverrides>
+                                                <artifactsOverride>${project.groupId}:${project.artifactId}:${project.version}</artifactsOverride>
+                                            </artifactsOverrides>
+                                        </aggregate>
+                                    </aggregates>
+                                    <scans>
+                                        <scan>
+                                            <includeClassifier>testing_oak_tar</includeClassifier>
+                                        </scan>
+                                    </scans>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- launch the Sling instances to test; only oak-tar -->
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>feature-launcher-maven-plugin</artifactId>
+                        <version>0.1.2</version>
+                        <configuration>
+                            <launches>
+                                <launch>
+                                    <id>sling-starter-oak-tar</id>
+                                    <!-- Include the feature previously aggregated -->
+                                    <feature>
+                                        <groupId>${project.groupId}</groupId>
+                                        <artifactId>${project.artifactId}</artifactId>
+                                        <version>${project.version}</version>
+                                        <classifier>testing_oak_tar</classifier>
+                                        <type>slingosgifeature</type>
+                                    </feature>
+                                    <launcherArguments>
+                                        <frameworkProperties>
+                                            <org.osgi.service.http.port>${starter-its.http.port}</org.osgi.service.http.port>
+                                        </frameworkProperties>
+                                    </launcherArguments>
+                                    <startTimeoutSeconds>${starter-its.startTimeoutSeconds}</startTimeoutSeconds>
+                                </launch>
+                            </launches>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>start</goal>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- run the ITs -->
+                    <plugin>
+                       <artifactId>maven-failsafe-plugin</artifactId>
+                       <!-- ensure that tests are run with JUnit 4, even if the test classpath has JUnit 5  -->
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.maven.surefire</groupId>
+                                <artifactId>surefire-junit47</artifactId>
+                                <version>${surefire.version}</version>
+                            </dependency>
+                        </dependencies>
+                       <executions>
+                           <execution>
+                               <goals>
+                                   <goal>integration-test</goal>
+                                   <goal>verify</goal>
+                               </goals>
+                           </execution>
+                       </executions>
+                       <configuration>
+                            <dependenciesToScan>
+                                <dependency>org.apache.sling:org.apache.sling.launchpad.integration-tests</dependency>
+                            </dependenciesToScan>
+                            <includes>
+                                <include>**/*Test.java</include>
+                                <include>**/*IT.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>${failsafe.exclude}</exclude>
+                                <!-- Don't run provisioning model ITs in the feature model context -->
+                                <exclude>org/apache/sling/launchpad/webapp/integrationtest/provisioning/**.java</exclude>
+                            </excludes>
+                           <systemPropertyVariables>
+                               <launchpad.http.server.url>http://localhost:${starter-its.http.port}/</launchpad.http.server.url>
+                               <starter.http.test.ports>false:${starter-its.http.port}</starter.http.test.ports>
+                               <starter.min.bundles.count>100</starter.min.bundles.count>
+                               <!-- Comma-separated list of paths to check for 200 status (added for SLING-10402) -->
+                               <starter.check.paths>
+                                    /slingshot/users/slingshot1/travel/home/images/home.jpg,
+                                    /slingshot/resources/images/background.jpg,
+                                    /slingshot/users/slingshot2/places/landing/images/landing.jpg,
+                                    /starter.html,
+                                    /bin/browser.html,
+                                    /system/console/bundles,
+                                </starter.check.paths>
+                           </systemPropertyVariables>
+                       </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <mailingLists>
