@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>26</version>
+        <version>27</version>
         <relativePath />
     </parent>
 
@@ -209,7 +209,7 @@
                     <dependency>
                         <groupId>org.apache.maven.release</groupId>
                         <artifactId>maven-release-oddeven-policy</artifactId>
-                        <version>3.0.0-M5</version>
+                        <version>3.0.0-M6</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -293,10 +293,8 @@
                         <trimStackTrace>false</trimStackTrace>
                     </configuration>
                 </plugin>
-                <!-- update from 3.11.0 managed in ASF parent -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.12.0</version>
                     <configuration>
                         <relativizeDecorationLinks>false</relativizeDecorationLinks><!-- leave absolute URLs untouched, like image urls in header: https://maven.apache.org/plugins/maven-site-plugin/site-mojo.html#relativizeDecorationLinks -->
                     </configuration>
