@@ -891,7 +891,7 @@
                 </property>
             </activation>
             <properties>
-                <it.startTimeoutSeconds>120</it.startTimeoutSeconds>
+                <starter-its.startTimeoutSeconds>120</starter-its.startTimeoutSeconds>
                 <starter-its.failsafeTestClassesDirectory>${project.build.testOutputDirectory}</starter-its.failsafeTestClassesDirectory>
             </properties>
             <dependencies>
