@@ -892,6 +892,7 @@
             </activation>
             <properties>
                 <it.startTimeoutSeconds>120</it.startTimeoutSeconds>
+                <starter-its.failsafeTestClassesDirectory>${project.build.testOutputDirectory}</starter-its.failsafeTestClassesDirectory>
             </properties>
             <dependencies>
                 <dependency>
@@ -1051,6 +1052,9 @@
                             <dependenciesToScan>
                                 <dependency>org.apache.sling:org.apache.sling.launchpad.integration-tests</dependency>
                             </dependenciesToScan>
+                            <testClassesDirectory>
+                                ${starter-its.failsafeTestClassesDirectory}
+                            </testClassesDirectory>
                             <includes>
                                 <include>**/*Test.java</include>
                                 <include>**/*IT.java</include>
