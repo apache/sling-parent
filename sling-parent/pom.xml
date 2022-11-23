@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>27</version>
+        <version>28</version>
         <relativePath />
     </parent>
 
@@ -62,7 +62,6 @@
         <surefire.version>3.0.0-M5</surefire.version>
         <minimalMavenBuildVersion>3.3.9</minimalMavenBuildVersion>
         <minimalJavaBuildVersion>1.8</minimalJavaBuildVersion>
-        <maven.plugin.tools.version>3.6.4</maven.plugin.tools.version><!-- version used for modules of https://maven.apache.org/plugin-tools/index.html -->
         <!-- the github id used for the ribbon for Maven sites: https://maven.apache.org/skins/maven-fluido-skin/#GitHub_ribbons -->
         <github.project.id>apache/sling-dummyproject</github.project.id>
         <javadoc.excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</javadoc.excludePackageNames>
