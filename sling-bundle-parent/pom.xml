@@ -40,7 +40,7 @@
     </scm>
 
     <properties>
-        <bnd.version>6.3.1</bnd.version>
+        <bnd.version>6.4.0</bnd.version>
     </properties>
 
     <build>
