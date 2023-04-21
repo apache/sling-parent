@@ -56,7 +56,7 @@
               - 9: Java 9
               - 10..19: Java 10-19
         -->
-        <sling.java.version>8</sling.java.version>
+        <sling.java.version>11</sling.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <surefire.version>3.0.0-M5</surefire.version>
