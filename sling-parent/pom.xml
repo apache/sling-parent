@@ -52,7 +52,7 @@
         <!--
             Java API and class file compliance. This property supports
             one of these values:
-              - 8: Java 8 (default)
+              - 8: Java 8 
               - 9: Java 9
               - 10..19: Java 10-19
         -->
