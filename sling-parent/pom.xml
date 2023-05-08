@@ -147,6 +147,23 @@
                             </rules>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>enforce-scope-of-annotation-deps</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedDependencies>
+                                    <searchTransitive>false</searchTransitive>
+                                    <excludes>
+                                        <exclude>org.jetbrains:annotations:*:*:compile</exclude>
+                                    </excludes>
+                                    <message>The annotation dependencies should be used with scope provided to prevent transitive inheritance and to prevent runtime inclusion</message>
+                                </bannedDependencies>
+                            </rules>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -262,6 +279,10 @@
 
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
