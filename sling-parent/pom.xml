@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>29</version>
+        <version>30</version>
         <relativePath />
     </parent>
 
@@ -143,7 +143,7 @@
                         </goals>
                         <configuration>
                             <rules>
-                                <requireExplicitDependencyScope implementation="org.apache.sling.maven.enforcer.RequireExplicitDependencyScope" />
+                                <requireExplicitDependencyScope />
                             </rules>
                         </configuration>
                     </execution>
@@ -225,7 +225,7 @@
                     <dependency>
                         <groupId>org.apache.maven.release</groupId>
                         <artifactId>maven-release-oddeven-policy</artifactId>
-                        <version>3.0.0-M7</version>
+                        <version>${version.maven-release-plugin}</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -280,10 +280,6 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
                     <configuration>
@@ -298,19 +294,6 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <configuration>
                         <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
-                    </configuration>
-                </plugin>
-                <!-- only overwrite config for surefire/failsafe -->
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <configuration>
-                        <trimStackTrace>false</trimStackTrace>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <configuration>
-                        <trimStackTrace>false</trimStackTrace>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -346,11 +329,6 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
                     <version>3.3.0</version>
                 </plugin>
                 <plugin>
