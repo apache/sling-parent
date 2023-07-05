@@ -21,7 +21,7 @@
     <groupId>org.apache.sling</groupId>
     <artifactId>sling-parent-reactor</artifactId>
     <packaging>pom</packaging>
-    <version>50-SNAPSHOT</version>
+    <version>50</version>
 
     <!-- the ASF parent is necessary to trigger the right release profile -->
     <parent>
@@ -38,7 +38,7 @@
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=sling-parent.git</url>
-        <tag>HEAD</tag>
+        <tag>sling-parent-reactor-50</tag>
     </scm>
 
     <modules>
