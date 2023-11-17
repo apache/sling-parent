@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling</artifactId>
-        <version>53-SNAPSHOT</version>
+        <version>60-SNAPSHOT</version>
         <relativePath>../sling-parent</relativePath>
     </parent>
 
@@ -39,7 +39,8 @@
     </scm>
 
     <properties>
-        <bnd.version>6.4.0</bnd.version>
+        <bnd.version>7.0.0</bnd.version>
+        <minimalJavaBuildVersion>17</minimalJavaBuildVersion><!-- Bnd 7+ requires Java 17 -->
     </properties>
 
     <build>
