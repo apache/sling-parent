@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>30</version>
+        <version>31</version>
         <relativePath />
     </parent>
 
@@ -57,13 +57,11 @@
               - 10..19: Java 10-19
         -->
         <sling.java.version>11</sling.java.version>
+
         <!-- release sets API classpath, source and target, see 
              https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
              and http://openjdk.java.net/jeps/247, this affects m-compiler-p and m-javadoc-p -->
         <maven.compiler.release>${sling.java.version}</maven.compiler.release>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <surefire.version>3.0.0-M5</surefire.version>
         <minimalMavenBuildVersion>3.3.9</minimalMavenBuildVersion>
         <minimalJavaBuildVersion>11</minimalJavaBuildVersion><!-- Parameter "maven.compiler.release" requires JDK9+ and we generally only support LTS releases -->
         <!-- the github id used for the ribbon for Maven sites: https://maven.apache.org/skins/maven-fluido-skin/#GitHub_ribbons -->
