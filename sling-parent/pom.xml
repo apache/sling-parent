@@ -477,7 +477,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>check</goal>
+                            <goal>${spotless.action}</goal>
                         </goals>
                         <phase>process-sources</phase>
                     </execution>
@@ -1100,6 +1100,30 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <!-- only check formatting with spotless by default -->
+            <id>format-check</id>
+            <activation>
+                <property>
+                    <name>!format</name>
+                </property>
+            </activation>
+            <properties>
+                <spotless.action>check</spotless.action>
+            </properties>
+        </profile>
+        <!-- reformat during build with spotless with -Dformat or -Pformat -->
+        <profile>
+            <id>format</id>
+            <activation>
+                <property>
+                    <name>format</name>
+                </property>
+            </activation>
+            <properties>
+                <spotless.action>apply</spotless.action>
+            </properties>
         </profile>
     </profiles>
 
