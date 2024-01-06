@@ -34,196 +34,20 @@
     <scm>
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
-        <url>https://github.com/apache/sling-parent.git</url>
         <tag>HEAD</tag>
+        <url>https://github.com/apache/sling-parent.git</url>
     </scm>
 
     <properties>
         <bnd.version>7.0.0</bnd.version>
-        <minimalJavaBuildVersion>17</minimalJavaBuildVersion><!-- Bnd 7+ requires Java 17 -->
+        <!-- Bnd 7+ requires Java 17 -->
+        <minimalJavaBuildVersion>17</minimalJavaBuildVersion>
     </properties>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>sling-maven-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>biz.aQute.bnd</groupId>
-                    <artifactId>bnd-maven-plugin</artifactId>
-                    <version>${bnd.version}</version>
-                    <executions>
-                        <execution>
-                            <id>bnd-process</id>
-                            <goals>
-                                <goal>bnd-process</goal>
-                            </goals>
-                            <configuration>
-                                <bnd><![CDATA[
-# a lot of bundle header are generated from pom elements by default: https://github.com/bndtools/bnd/tree/master/maven/bnd-maven-plugin#default-bundle-headers
-Bundle-Category: sling
-
-# export all versioned packages except for conditional ones (https://github.com/bndtools/bnd/issues/3721#issuecomment-579026778)
--exportcontents: ${removeall;${packages;VERSIONED};${packages;CONDITIONAL}}
-
-# see https://issues.apache.org/jira/browse/SLING-8980
--snapshot: SNAPSHOT
-
-# reproducible builds (https://github.com/bndtools/bnd/issues/3521)
--noextraheaders: true
-
-# we cannot let bnd-maven-plugin generate it automatically, as Maven applies some inheritance logic which is incorrect for Sling (https://issues.apache.org/jira/browse/SLING-8537)
-Bundle-DocURL: https://sling.apache.org
-
-# generate error (instead of warning) when exported package uses private (non-exported) reference
--fixupmessages:"Export *,  has \\d+,  private references"; \
-    restrict:=warning; \
-    is:=error
-                                ]]></bnd>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>biz.aQute.bnd</groupId>
-                    <artifactId>bnd-baseline-maven-plugin</artifactId>
-                    <version>${bnd.version}</version>
-                    <configuration>
-                        <includeDistributionManagement>false</includeDistributionManagement>
-                        <diffignores>
-                            <!-- ignore Bundle-Version header for baseline, i.e. no enforcement of specific bundle versions -->
-                            <diffignore>Bundle-Version</diffignore>
-                        </diffignores>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>bnd-baseline</id>
-                            <goals>
-                                <goal>baseline</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <archive>
-                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        </archive>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-        <plugins>
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>ban-plugins-and-dependencies</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <bannedPlugins>
-                                    <excludes>
-                                        <exclude>org.apache.felix:maven-scr-plugin</exclude>
-                                    </excludes>
-                                    <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
-                                        annotations or stick with Sling Parent 29.</message>
-                                </bannedPlugins>
-                                <bannedDependencies>
-                                    <excludes>
-                                        <exclude>org.apache.felix:org.apache.felix.scr.annotations</exclude>
-                                    </excludes>
-                                    <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
-                                        annotations or stick with Sling Parent 29.</message>
-                                </bannedDependencies>
-                                <bannedPlugins>
-                                    <excludes>
-                                        <exclude>org.apache.felix:maven-bundle-plugin</exclude>
-                                    </excludes>
-                                    <message>The maven-bundle-plugin is no longer supported - please migrate to bnd-maven-plugin or stick
-                                        with Sling Parent 34.</message>
-                                </bannedPlugins>
-                                <bannedPlugins>
-                                    <excludes>
-                                        <exclude>org.apache.sling:maven-sling-plugin</exclude>
-                                    </excludes>
-                                    <message>Please change all occurrences of maven-sling-plugin to sling-maven-plugin (plugin was renamed).</message>
-                                </bannedPlugins>
-                                <bannedDependencies>
-                                    <excludes>
-                                        <exclude>org.osgi:osgi.core</exclude>
-                                        <exclude>org.osgi:osgi.cmpn</exclude>
-                                    </excludes>
-                                    <message>Use the individual OSGi chapter dependencies instead of the aggregate ones. Further infos at http://docs.osgi.org/artifacts/#aggregate-artifacts.</message>
-                                </bannedDependencies>
-                                <bannedDependencies>
-                                    <searchTransitive>false</searchTransitive>
-                                    <excludes>
-                                        <exclude>org.osgi:org.osgi.annotation.versioning:*:*:compile</exclude>
-                                        <exclude>org.osgi:org.osgi.annotation.bundle:*:*:compile</exclude>
-                                        <exclude>org.osgi:org.osgi.service.component.annotations:*:*:compile</exclude>
-                                        <exclude>org.osgi:org.osgi.service.metatype.annotations:*:*:compile</exclude>
-                                        <exclude>org.apache.sling:org.apache.sling.servlets.annotations:*:*:compile</exclude>
-                                    </excludes>
-                                    <message>The annotation dependencies should be used with scope provided to prevent transitive inheritance and to prevent runtime inclusion</message>
-                                </bannedDependencies>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>biz.aQute.bnd</groupId>
-                <artifactId>bnd-maven-plugin</artifactId>
-            </plugin>
-             <plugin>
-                <groupId>biz.aQute.bnd</groupId>
-                <artifactId>bnd-baseline-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-
-    </build>
-
-    <profiles>
-        <profile>
-            <!--
-                Use this profile to install the OSGi bundle
-                automatically, during development
-            -->
-            <id>autoInstallBundle</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>sling-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
     <dependencyManagement>
 
-        <!-- OSGi -->
         <dependencies>
-            <!-- Aggregates (rather use individual artifacts referenced below) -->
+            <!-- OSGi Aggregates (rather use individual artifacts referenced below) -->
             <!-- Core R7 -->
             <dependency>
                 <groupId>org.osgi</groupId>
@@ -368,5 +192,181 @@ Bundle-DocURL: https://sling.apache.org
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>sling-maven-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>biz.aQute.bnd</groupId>
+                    <artifactId>bnd-maven-plugin</artifactId>
+                    <version>${bnd.version}</version>
+                    <executions>
+                        <execution>
+                            <id>bnd-process</id>
+                            <goals>
+                                <goal>bnd-process</goal>
+                            </goals>
+                            <configuration>
+                                <bnd><![CDATA[
+# a lot of bundle header are generated from pom elements by default: https://github.com/bndtools/bnd/tree/master/maven/bnd-maven-plugin#default-bundle-headers
+Bundle-Category: sling
+
+# export all versioned packages except for conditional ones (https://github.com/bndtools/bnd/issues/3721#issuecomment-579026778)
+-exportcontents: ${removeall;${packages;VERSIONED};${packages;CONDITIONAL}}
+
+# see https://issues.apache.org/jira/browse/SLING-8980
+-snapshot: SNAPSHOT
+
+# reproducible builds (https://github.com/bndtools/bnd/issues/3521)
+-noextraheaders: true
+
+# we cannot let bnd-maven-plugin generate it automatically, as Maven applies some inheritance logic which is incorrect for Sling (https://issues.apache.org/jira/browse/SLING-8537)
+Bundle-DocURL: https://sling.apache.org
+
+# generate error (instead of warning) when exported package uses private (non-exported) reference
+-fixupmessages:"Export *,  has \\d+,  private references"; \
+    restrict:=warning; \
+    is:=error
+                                ]]></bnd>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>biz.aQute.bnd</groupId>
+                    <artifactId>bnd-baseline-maven-plugin</artifactId>
+                    <version>${bnd.version}</version>
+                    <configuration>
+                        <includeDistributionManagement>false</includeDistributionManagement>
+                        <diffignores>
+                            <!-- ignore Bundle-Version header for baseline, i.e. no enforcement of specific bundle versions -->
+                            <diffignore>Bundle-Version</diffignore>
+                        </diffignores>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>bnd-baseline</id>
+                            <goals>
+                                <goal>baseline</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>ban-plugins-and-dependencies</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedPlugins>
+                                    <excludes>
+                                        <exclude>org.apache.felix:maven-scr-plugin</exclude>
+                                    </excludes>
+                                    <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
+                                        annotations or stick with Sling Parent 29.</message>
+                                </bannedPlugins>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>org.apache.felix:org.apache.felix.scr.annotations</exclude>
+                                    </excludes>
+                                    <message>Felix SCR annotations and the maven-scr-plugin are no longer supported - please migrate to OSGi
+                                        annotations or stick with Sling Parent 29.</message>
+                                </bannedDependencies>
+                                <bannedPlugins>
+                                    <excludes>
+                                        <exclude>org.apache.felix:maven-bundle-plugin</exclude>
+                                    </excludes>
+                                    <message>The maven-bundle-plugin is no longer supported - please migrate to bnd-maven-plugin or stick
+                                        with Sling Parent 34.</message>
+                                </bannedPlugins>
+                                <bannedPlugins>
+                                    <excludes>
+                                        <exclude>org.apache.sling:maven-sling-plugin</exclude>
+                                    </excludes>
+                                    <message>Please change all occurrences of maven-sling-plugin to sling-maven-plugin (plugin was renamed).</message>
+                                </bannedPlugins>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>org.osgi:osgi.core</exclude>
+                                        <exclude>org.osgi:osgi.cmpn</exclude>
+                                    </excludes>
+                                    <message>Use the individual OSGi chapter dependencies instead of the aggregate ones. Further infos at http://docs.osgi.org/artifacts/#aggregate-artifacts.</message>
+                                </bannedDependencies>
+                                <bannedDependencies>
+                                    <searchTransitive>false</searchTransitive>
+                                    <excludes>
+                                        <exclude>org.osgi:org.osgi.annotation.versioning:*:*:compile</exclude>
+                                        <exclude>org.osgi:org.osgi.annotation.bundle:*:*:compile</exclude>
+                                        <exclude>org.osgi:org.osgi.service.component.annotations:*:*:compile</exclude>
+                                        <exclude>org.osgi:org.osgi.service.metatype.annotations:*:*:compile</exclude>
+                                        <exclude>org.apache.sling:org.apache.sling.servlets.annotations:*:*:compile</exclude>
+                                    </excludes>
+                                    <message>The annotation dependencies should be used with scope provided to prevent transitive inheritance and to prevent runtime inclusion</message>
+                                </bannedDependencies>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-baseline-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <profiles>
+        <profile>
+            <!--
+                Use this profile to install the OSGi bundle
+                automatically, during development
+            -->
+            <id>autoInstallBundle</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>sling-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-bundle</id>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

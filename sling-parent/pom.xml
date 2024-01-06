@@ -27,14 +27,67 @@
 
     <groupId>org.apache.sling</groupId>
     <artifactId>sling</artifactId>
-    <packaging>pom</packaging>
     <version>60-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <name>Apache Sling (Parent)</name>
     <description>The parent project for Apache Sling</description>
-    <inceptionYear>2007</inceptionYear>
 
     <url>https://sling.apache.org</url>
+    <inceptionYear>2007</inceptionYear>
+
+    <!-- Please visit our website for the current information about the
+         Apache Sling project team. (see #SLING-1120 why we don't include
+         the list here) -->
+    <developers>
+        <developer>
+            <id>sling</id>
+            <name>Apache Sling Project</name>
+            <url>https://sling.apache.org/site/project-team.html</url>
+        </developer>
+    </developers>
+
+    <mailingLists>
+        <mailingList>
+            <name>Apache Sling Users List</name>
+            <subscribe>users-subscribe@sling.apache.org</subscribe>
+            <unsubscribe>users-unsubscribe@sling.apache.org</unsubscribe>
+            <!-- to prevent scraping just point to Sling websites, which contains hints how to post -->
+            <post>https://sling.apache.org/project-information.html#mailing-lists</post>
+            <archive>https://lists.apache.org/list.html?users@sling.apache.org</archive>
+            <otherArchives>
+                <otherArchive>https://www.mail-archive.com/users@sling.apache.org/</otherArchive>
+            </otherArchives>
+        </mailingList>
+        <mailingList>
+            <name>Apache Sling Development List</name>
+            <subscribe>dev-subscribe@sling.apache.org</subscribe>
+            <unsubscribe>dev-unsubscribe@sling.apache.org</unsubscribe>
+            <!-- to prevent scraping just point to Sling websites, which contains hints how to post -->
+            <post>https://sling.apache.org/project-information.html#mailing-lists</post>
+            <archive>https://lists.apache.org/list.html?dev@sling.apache.org</archive>
+            <otherArchives>
+                <otherArchive>https://www.mail-archive.com/dev@sling.apache.org/</otherArchive>
+            </otherArchives>
+        </mailingList>
+        <mailingList>
+            <name>Apache Sling Source Control List</name>
+            <subscribe>commits-subscribe@sling.apache.org</subscribe>
+            <unsubscribe>commits-unsubscribe@sling.apache.org</unsubscribe>
+            <archive>https://mail-archives.apache.org/mod_mbox/sling-commits/</archive>
+            <otherArchives>
+                <otherArchive>https://sling-commits.markmail.org/</otherArchive>
+                <otherArchive>https://www.mail-archive.com/commits@sling.apache.org/</otherArchive>
+            </otherArchives>
+        </mailingList>
+    </mailingLists>
+
+    <scm>
+        <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
+        <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://github.com/apache/sling-parent.git</url>
+    </scm>
 
     <issueManagement>
         <system>Jira</system>
@@ -57,7 +110,7 @@
               - 10..19: Java 10-19
         -->
         <sling.java.version>11</sling.java.version>
-        
+
         <junit5.version>5.10.1</junit5.version>
 
         <!-- release sets API classpath, source and target, see 
@@ -65,57 +118,166 @@
              and http://openjdk.java.net/jeps/247, this affects m-compiler-p and m-javadoc-p -->
         <maven.compiler.release>${sling.java.version}</maven.compiler.release>
         <minimalMavenBuildVersion>3.3.9</minimalMavenBuildVersion>
-        <minimalJavaBuildVersion>11</minimalJavaBuildVersion><!-- Parameter "maven.compiler.release" requires JDK9+ and we generally only support LTS releases -->
+        <!-- Parameter "maven.compiler.release" requires JDK9+ and we generally only support LTS releases -->
+        <minimalJavaBuildVersion>11</minimalJavaBuildVersion>
         <!-- the github id used for the ribbon for Maven sites: https://maven.apache.org/skins/maven-fluido-skin/#GitHub_ribbons -->
         <github.project.id>apache/sling-dummyproject</github.project.id>
         <javadoc.excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</javadoc.excludePackageNames>
     </properties>
 
-    <scm>
-        <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
-        <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
-        <url>https://github.com/apache/sling-parent.git</url>
-        <tag>HEAD</tag>
-    </scm>
+    <dependencyManagement>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <!-- configuration set in build->pluginMgmt -->
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-changes-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>jira-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-                <configuration>
-                    <fixVersionIds>${site.jira.version.id}</fixVersionIds>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+        <dependencies>
+            <!-- Web Application API -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
+            <!-- Dependency injection annotations -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+            </dependency>
+
+            <!-- JCR API -->
+            <dependency>
+                <groupId>javax.jcr</groupId>
+                <artifactId>jcr</artifactId>
+                <version>2.0</version>
+            </dependency>
+
+            <!-- Basic Logging -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.25</version>
+            </dependency>
+
+            <!-- JetBrains annotations for null-analysis (SLING-7798), https://github.com/JetBrains/java-annotations -->
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>23.0.0</version>
+            </dependency>
+
+            <!-- Annotations used in Maven Plugins -->
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <version>${maven.plugin.tools.version}</version>
+            </dependency>
+
+            <!-- Basic dependencies for Unit Tests -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>1.7.25</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit5.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
+                    <configuration>
+                        <excludePackageNames>${javadoc.excludePackageNames}</excludePackageNames>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-changes-plugin</artifactId>
+                    <version>2.12.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <configuration>
+                        <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <configuration>
+                        <!-- leave absolute URLs untouched, like image urls in header: https://maven.apache.org/plugins/maven-site-plugin/site-mojo.html#relativizeDecorationLinks -->
+                        <relativizeDecorationLinks>false</relativizeDecorationLinks>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>maven-jspc-plugin</artifactId>
+                    <version>2.0.8</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>slingstart-maven-plugin</artifactId>
+                    <version>1.9.12</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven3-plugin</artifactId>
+                    <version>1.9.11</version>
+                </plugin>
+                <!-- 
+                    Documentation: https://geronimo.apache.org/maven/genesis/plugins/tools-maven-plugin/usage.html
+                    Source code: https://svn.apache.org/repos/asf/geronimo/genesis/tags/genesis-1.4/plugins/tools-maven-plugin/
+                    -->
+                <plugin>
+                    <groupId>org.apache.geronimo.genesis.plugins</groupId>
+                    <artifactId>tools-maven-plugin</artifactId>
+                    <version>1.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.11</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.servicemix.tooling</groupId>
+                    <artifactId>depends-maven-plugin</artifactId>
+                    <version>1.5.0</version>
+                    <executions>
+                        <execution>
+                            <id>generate-depends-file</id>
+                            <goals>
+                                <goal>generate-depends-file</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>2.41.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
-                     <execution>
+                    <execution>
                         <id>enforce-sling-java-version</id>
                         <goals>
                             <goal>enforce</goal>
@@ -125,9 +287,7 @@
                                 <requireProperty>
                                     <property>sling.java.version</property>
                                     <regex>^(8|9|1[0-9])$</regex>
-                                    <regexMessage>
-                                        The value of the "sling.java.version" property should comply with the following pattern: ^(8|9|1[0-9])$.
-                                    </regexMessage>
+                                    <regexMessage>The value of the "sling.java.version" property should comply with the following pattern: ^(8|9|1[0-9])$.</regexMessage>
                                 </requireProperty>
                             </rules>
                         </configuration>
@@ -218,6 +378,9 @@
             </plugin>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <projectVersionPolicyId>OddEvenVersionPolicy</projectVersionPolicyId>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.release</groupId>
@@ -225,9 +388,6 @@
                         <version>${version.maven-release-plugin}</version>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <projectVersionPolicyId>OddEvenVersionPolicy</projectVersionPolicyId>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>
@@ -265,95 +425,135 @@
                 <executions>
                     <execution>
                         <id>rat-check</id>
-                        <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- automatically enforce common source formatting -->
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <configuration>
+                    <java>
+                        <!-- orders of used formatters are important MPOM-376 -->
+                        <!-- eg. palantir overrides importOrder, so should be first -->
+                        <palantirJavaFormat>
+                            <version>2.39.0</version>
+                        </palantirJavaFormat>
+                        <removeUnusedImports />
+                        <!-- https://github.com/diffplug/spotless/tree/main/plugin-maven#java -->
+                        <importOrder>
+                            <order>javax,java,,\#</order>
+                            <!-- static imports last -->
+                        </importOrder>
+                        <!-- use common ASF license header from https://github.com/apache/maven-shared-resources/blob/master/src/main/resources/config/maven-header-plain.txt  -->
+                        <licenseHeader>
+                            <file>config/maven-header-plain.txt</file>
+                        </licenseHeader>
+                    </java>
+                    <pom>
+                        <sortPom>
+                            <expandEmptyElements>false</expandEmptyElements>
+                            <!-- https://issues.apache.org/jira/browse/MRELEASE-1111 -->
+                            <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
+                            <!-- Indentation -->
+                            <nrOfIndentSpace>4</nrOfIndentSpace>
+                        </sortPom>
+                    </pom>
+                    <upToDateChecking>
+                        <enabled>true</enabled>
+                    </upToDateChecking>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.shared</groupId>
+                        <artifactId>maven-shared-resources</artifactId>
+                        <version>5</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>${spotless.action}</goal>
+                        </goals>
+                        <phase>process-sources</phase>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <!-- this affects both direct invocation and execution in the context of site building (https://maven.apache.org/shared/maven-reporting-exec/) -->
-                    <configuration>
-                        <excludePackageNames>${javadoc.excludePackageNames}</excludePackageNames>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-changes-plugin</artifactId>
-                    <version>2.12.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <configuration>
-                        <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <configuration>
-                        <relativizeDecorationLinks>false</relativizeDecorationLinks><!-- leave absolute URLs untouched, like image urls in header: https://maven.apache.org/plugins/maven-site-plugin/site-mojo.html#relativizeDecorationLinks -->
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>maven-jspc-plugin</artifactId>
-                    <version>2.0.8</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>slingstart-maven-plugin</artifactId>
-                    <version>1.9.12</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven3-plugin</artifactId>
-                    <version>1.9.11</version>
-                </plugin>
-                <!-- 
-                    Documentation: https://geronimo.apache.org/maven/genesis/plugins/tools-maven-plugin/usage.html
-                    Source code: https://svn.apache.org/repos/asf/geronimo/genesis/tags/genesis-1.4/plugins/tools-maven-plugin/
-                    -->
-                <plugin>
-                    <groupId>org.apache.geronimo.genesis.plugins</groupId>
-                    <artifactId>tools-maven-plugin</artifactId>
-                    <version>1.4</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.11</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.servicemix.tooling</groupId>
-                    <artifactId>depends-maven-plugin</artifactId>
-                    <version>1.5.0</version>
-                    <executions>
-                        <execution>
-                            <id>generate-depends-file</id>
-                            <goals>
-                                <goal>generate-depends-file</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <!-- configuration set in build->pluginMgmt -->
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-changes-plugin</artifactId>
+                <configuration>
+                    <fixVersionIds>${site.jira.version.id}</fixVersionIds>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>jira-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <profiles>
         <profile>
             <id>jacoco-report</id>
             <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <configuration>
+                                <argLine>${jacoco.ut.command}</argLine>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-failsafe-plugin</artifactId>
+                            <configuration>
+                                <argLine>${jacoco.it.command}</argLine>
+                                <systemPropertyVariables>
+                                    <!--
+                                    for IT where you need a forked JVM to run the tests you can use this system property to make sure that
+                                    the JaCoCo agent correctly instruments your code
+                                     -->
+                                    <jacoco.it.command>${jacoco.it.command}</jacoco.it.command>
+                                </systemPropertyVariables>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-invoker-plugin</artifactId>
+                            <configuration>
+                                <mavenOpts>${jacoco.it.command}</mavenOpts>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
                 <plugins>
                     <plugin>
                         <groupId>org.jacoco</groupId>
@@ -388,7 +588,7 @@
                                 </goals>
                                 <configuration>
                                     <dataFile>${project.build.directory}/jacoco-ut.exec</dataFile>
-                                    <outputDirectory> ${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                                    <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -403,10 +603,10 @@
                             </execution>
                             <execution>
                                 <id>merge-unit-and-it</id>
-                                <phase>post-integration-test</phase>
                                 <goals>
                                     <goal>merge</goal>
                                 </goals>
+                                <phase>post-integration-test</phase>
                                 <configuration>
                                     <destFile>${project.build.directory}/jacoco-merged.exec</destFile>
                                     <fileSets>
@@ -422,10 +622,10 @@
                             </execution>
                             <execution>
                                 <id>report-merged</id>
-                                <phase>verify</phase>
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
+                                <phase>verify</phase>
                                 <configuration>
                                     <dataFile>${project.build.directory}/jacoco-merged.exec</dataFile>
                                     <outputDirectory>${project.reporting.outputDirectory}/jacoco-merged</outputDirectory>
@@ -434,38 +634,6 @@
                         </executions>
                     </plugin>
                 </plugins>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-surefire-plugin</artifactId>
-                            <configuration>
-                                <argLine>${jacoco.ut.command}</argLine>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-failsafe-plugin</artifactId>
-                            <configuration>
-                                <argLine>${jacoco.it.command}</argLine>
-                                <systemPropertyVariables>
-                                    <!--
-                                    for IT where you need a forked JVM to run the tests you can use this system property to make sure that
-                                    the JaCoCo agent correctly instruments your code
-                                     -->
-                                    <jacoco.it.command>${jacoco.it.command}</jacoco.it.command>
-                                </systemPropertyVariables>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-invoker-plugin</artifactId>
-                            <configuration>
-                                <mavenOpts>${jacoco.it.command}</mavenOpts>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
             </build>
         </profile>
         <!-- This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
@@ -487,36 +655,24 @@
                                 <lifecycleMappingMetadata>
                                     <pluginExecutions>
                                         <pluginExecution>
-                                        <pluginExecutionFilter>
-                                            <groupId>
-                                                org.apache.maven.plugins
-                                            </groupId>
-                                            <artifactId>
-                                                maven-dependency-plugin
-                                            </artifactId>
-                                            <versionRange>
-                                                [2.2,)
-                                            </versionRange>
-                                            <goals>
-                                                <goal>copy-dependencies</goal>
-                                                <goal>unpack</goal>
-                                            </goals>
-                                        </pluginExecutionFilter>
-                                        <action>
-                                             <ignore />
-                                        </action>
-                                    </pluginExecution>
+                                            <pluginExecutionFilter>
+                                                <groupId>org.apache.maven.plugins</groupId>
+                                                <artifactId>maven-dependency-plugin</artifactId>
+                                                <versionRange>[2.2,)</versionRange>
+                                                <goals>
+                                                    <goal>copy-dependencies</goal>
+                                                    <goal>unpack</goal>
+                                                </goals>
+                                            </pluginExecutionFilter>
+                                            <action>
+                                                <ignore />
+                                            </action>
+                                        </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.codehaus.groovy.maven
-                                                </groupId>
-                                                <artifactId>
-                                                    gmaven-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [1.0,)
-                                                </versionRange>
+                                                <groupId>org.codehaus.groovy.maven</groupId>
+                                                <artifactId>gmaven-plugin</artifactId>
+                                                <versionRange>[1.0,)</versionRange>
                                                 <goals>
                                                     <goal>compile</goal>
                                                     <goal>testCompile</goal>
@@ -529,19 +685,11 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.codehaus.mojo
-                                                </groupId>
-                                                <artifactId>
-                                                    build-helper-maven-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [1.5,)
-                                                </versionRange>
+                                                <groupId>org.codehaus.mojo</groupId>
+                                                <artifactId>build-helper-maven-plugin</artifactId>
+                                                <versionRange>[1.5,)</versionRange>
                                                 <goals>
-                                                    <goal>
-                                                        reserve-network-port
-                                                    </goal>
+                                                    <goal>reserve-network-port</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
@@ -550,15 +698,9 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.sling
-                                                </groupId>
-                                                <artifactId>
-                                                    maven-launchpad-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [2.0.10,)
-                                                </versionRange>
+                                                <groupId>org.apache.sling</groupId>
+                                                <artifactId>maven-launchpad-plugin</artifactId>
+                                                <versionRange>[2.0.10,)</versionRange>
                                                 <goals>
                                                     <goal>prepare-package</goal>
                                                 </goals>
@@ -569,15 +711,9 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.sling
-                                                </groupId>
-                                                <artifactId>
-                                                    maven-jcrocm-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [2.0.4-incubator,)
-                                                </versionRange>
+                                                <groupId>org.apache.sling</groupId>
+                                                <artifactId>maven-jcrocm-plugin</artifactId>
+                                                <versionRange>[2.0.4-incubator,)</versionRange>
                                                 <goals>
                                                     <goal>ocm</goal>
                                                 </goals>
@@ -588,15 +724,9 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.sling
-                                                </groupId>
-                                                <artifactId>
-                                                    sling-maven-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [2.1.0,)
-                                                </versionRange>
+                                                <groupId>org.apache.sling</groupId>
+                                                <artifactId>sling-maven-plugin</artifactId>
+                                                <versionRange>[2.1.0,)</versionRange>
                                                 <goals>
                                                     <goal>generate-adapter-metadata</goal>
                                                 </goals>
@@ -607,19 +737,11 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.maven.plugins
-                                                </groupId>
-                                                <artifactId>
-                                                    maven-dependency-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [2.2,)
-                                                </versionRange>
+                                                <groupId>org.apache.maven.plugins</groupId>
+                                                <artifactId>maven-dependency-plugin</artifactId>
+                                                <versionRange>[2.2,)</versionRange>
                                                 <goals>
-                                                    <goal>
-                                                        unpack-dependencies
-                                                    </goal>
+                                                    <goal>unpack-dependencies</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
@@ -628,19 +750,11 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.maven.plugins
-                                                </groupId>
-                                                <artifactId>
-                                                    maven-jar-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [2.3.1,)
-                                                </versionRange>
+                                                <groupId>org.apache.maven.plugins</groupId>
+                                                <artifactId>maven-jar-plugin</artifactId>
+                                                <versionRange>[2.3.1,)</versionRange>
                                                 <goals>
-                                                    <goal>
-                                                        jar
-                                                    </goal>
+                                                    <goal>jar</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
@@ -649,19 +763,11 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.sling
-                                                </groupId>
-                                                <artifactId>
-                                                    maven-jspc-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [2.0.4,)
-                                                </versionRange>
+                                                <groupId>org.apache.sling</groupId>
+                                                <artifactId>maven-jspc-plugin</artifactId>
+                                                <versionRange>[2.0.4,)</versionRange>
                                                 <goals>
-                                                    <goal>
-                                                        jspc
-                                                    </goal>
+                                                    <goal>jspc</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
@@ -670,19 +776,11 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    net.alchim31.maven
-                                                </groupId>
-                                                <artifactId>
-                                                    yuicompressor-maven-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [1.3.0,)
-                                                </versionRange>
+                                                <groupId>net.alchim31.maven</groupId>
+                                                <artifactId>yuicompressor-maven-plugin</artifactId>
+                                                <versionRange>[1.3.0,)</versionRange>
                                                 <goals>
-                                                    <goal>
-                                                        compress
-                                                    </goal>
+                                                    <goal>compress</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
@@ -691,22 +789,12 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.scala-tools
-                                                </groupId>
-                                                <artifactId>
-                                                    maven-scala-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [2.15.2,)
-                                                </versionRange>
+                                                <groupId>org.scala-tools</groupId>
+                                                <artifactId>maven-scala-plugin</artifactId>
+                                                <versionRange>[2.15.2,)</versionRange>
                                                 <goals>
-                                                    <goal>
-                                                        compile
-                                                    </goal>
-                                                    <goal>
-                                                        testCompile
-                                                    </goal>
+                                                    <goal>compile</goal>
+                                                    <goal>testCompile</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
@@ -715,19 +803,11 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.maven.plugins
-                                                </groupId>
-                                                <artifactId>
-                                                    maven-enforcer-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [1.3.1,)
-                                                </versionRange>
+                                                <groupId>org.apache.maven.plugins</groupId>
+                                                <artifactId>maven-enforcer-plugin</artifactId>
+                                                <versionRange>[1.3.1,)</versionRange>
                                                 <goals>
-                                                    <goal>
-                                                        enforce
-                                                    </goal>
+                                                    <goal>enforce</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
@@ -736,19 +816,11 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.maven.plugins
-                                                </groupId>
-                                                <artifactId>
-                                                    maven-remote-resources-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [1.5,)
-                                                </versionRange>
+                                                <groupId>org.apache.maven.plugins</groupId>
+                                                <artifactId>maven-remote-resources-plugin</artifactId>
+                                                <versionRange>[1.5,)</versionRange>
                                                 <goals>
-                                                    <goal>
-                                                        process
-                                                    </goal>
+                                                    <goal>process</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
@@ -757,15 +829,9 @@
                                         </pluginExecution>
                                         <pluginExecution>
                                             <pluginExecutionFilter>
-                                                <groupId>
-                                                    org.apache.avro
-                                                </groupId>
-                                                <artifactId>
-                                                    avro-maven-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    [1.7.7,)
-                                                </versionRange>
+                                                <groupId>org.apache.avro</groupId>
+                                                <artifactId>avro-maven-plugin</artifactId>
+                                                <versionRange>[1.7.7,)</versionRange>
                                                 <goals>
                                                     <goal>schema</goal>
                                                 </goals>
@@ -793,7 +859,7 @@
             <build>
                 <pluginManagement>
                     <plugins>
-                    <!-- Create a source-release artifact that contains the fully buildable
+                        <!-- Create a source-release artifact that contains the fully buildable
                          project directory source structure. This is the artifact which is
                          the official subject of any release vote. -->
                         <plugin>
@@ -803,10 +869,10 @@
                             <executions>
                                 <execution>
                                     <id>source-release-assembly-for-pom</id>
-                                    <phase>package</phase>
                                     <goals>
                                         <goal>single</goal>
                                     </goals>
+                                    <phase>package</phase>
                                     <configuration>
                                         <runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
                                         <descriptorRefs>
@@ -852,28 +918,28 @@
             </properties>
             <dependencies>
                 <dependency>
-                     <groupId>org.apache.sling</groupId>
-                     <artifactId>org.apache.sling.launchpad.integration-tests</artifactId>
-                     <version>${starter-its.starter.version}</version>
-                     <scope>test</scope>
-                     <!--
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>org.apache.sling.launchpad.integration-tests</artifactId>
+                    <version>${starter-its.starter.version}</version>
+                    <scope>test</scope>
+                    <!--
                         Remove various banned dependencies. These should be gradually removed from the integration-tests
                         module.
                     -->
-                     <exclusions>
-                         <exclusion>
-                             <groupId>org.apache.felix</groupId>
-                             <artifactId>org.apache.felix.scr.annotations</artifactId>
-                         </exclusion>
-                         <exclusion>
-                             <groupId>org.osgi</groupId>
-                             <artifactId>osgi.core</artifactId>
-                         </exclusion>
-                         <exclusion>
-                             <groupId>org.osgi</groupId>
-                             <artifactId>osgi.cmpn</artifactId>
-                         </exclusion>
-                     </exclusions>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.apache.felix</groupId>
+                            <artifactId>org.apache.felix.scr.annotations</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.osgi</groupId>
+                            <artifactId>osgi.core</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.osgi</groupId>
+                            <artifactId>osgi.cmpn</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
             </dependencies>
             <build>
@@ -914,12 +980,12 @@
                             </execution>
                             <execution>
                                 <id>aggregate-features</id>
-                                <phase>prepare-package</phase>
                                 <goals>
                                     <goal>aggregate-features</goal>
                                     <goal>attach-features</goal>
                                     <goal>analyse-features</goal>
                                 </goals>
+                                <phase>prepare-package</phase>
                                 <configuration>
                                     <aggregates>
                                         <aggregate>
@@ -935,7 +1001,7 @@
                                             </includeArtifact>
                                             <includeClassifier>current-artifact-feature</includeClassifier>
                                             <!-- To apply the same override rule for all clashes, a wildcard using '*' for
-                                                 groupID and artifactID can be used; this can be used as a catch all --> 
+                                                 groupID and artifactID can be used; this can be used as a catch all -->
                                             <artifactsOverrides>
                                                 <artifactsOverride>${project.groupId}:${project.artifactId}:${project.version}</artifactsOverride>
                                             </artifactsOverrides>
@@ -987,30 +1053,12 @@
                     </plugin>
                     <!-- run the ITs -->
                     <plugin>
-                       <artifactId>maven-failsafe-plugin</artifactId>
-                       <!-- ensure that tests are run with JUnit 4, even if the test classpath has JUnit 5  -->
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.apache.maven.surefire</groupId>
-                                <artifactId>surefire-junit47</artifactId>
-                                <version>${surefire.version}</version>
-                            </dependency>
-                        </dependencies>
-                       <executions>
-                           <execution>
-                               <goals>
-                                   <goal>integration-test</goal>
-                                   <goal>verify</goal>
-                               </goals>
-                           </execution>
-                       </executions>
-                       <configuration>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
                             <dependenciesToScan>
                                 <dependency>org.apache.sling:org.apache.sling.launchpad.integration-tests</dependency>
                             </dependenciesToScan>
-                            <testClassesDirectory>
-                                ${starter-its.failsafeTestClassesDirectory}
-                            </testClassesDirectory>
+                            <testClassesDirectory>${starter-its.failsafeTestClassesDirectory}</testClassesDirectory>
                             <includes>
                                 <include>**/*Test.java</include>
                                 <include>**/*IT.java</include>
@@ -1020,163 +1068,63 @@
                                 <!-- Don't run provisioning model ITs in the feature model context -->
                                 <exclude>org/apache/sling/launchpad/webapp/integrationtest/provisioning/**.java</exclude>
                             </excludes>
-                           <systemPropertyVariables>
-                               <launchpad.http.server.url>http://localhost:${starter-its.http.port}/</launchpad.http.server.url>
-                               <starter.http.test.ports>false:${starter-its.http.port}</starter.http.test.ports>
-                               <starter.min.bundles.count>100</starter.min.bundles.count>
-                               <!-- Comma-separated list of paths to check for 200 status (added for SLING-10402) -->
-                               <starter.check.paths>
-                                    /slingshot/users/slingshot1/travel/home/images/home.jpg,
+                            <systemPropertyVariables>
+                                <launchpad.http.server.url>http://localhost:${starter-its.http.port}/</launchpad.http.server.url>
+                                <starter.http.test.ports>false:${starter-its.http.port}</starter.http.test.ports>
+                                <starter.min.bundles.count>100</starter.min.bundles.count>
+                                <!-- Comma-separated list of paths to check for 200 status (added for SLING-10402) -->
+                                <starter.check.paths>/slingshot/users/slingshot1/travel/home/images/home.jpg,
                                     /slingshot/resources/images/background.jpg,
                                     /slingshot/users/slingshot2/places/landing/images/landing.jpg,
                                     /starter.html,
                                     /bin/browser.html,
-                                    /system/console/bundles,
-                                </starter.check.paths>
-                           </systemPropertyVariables>
-                       </configuration>
+                                    /system/console/bundles,</starter.check.paths>
+                            </systemPropertyVariables>
+                        </configuration>
+                        <!-- ensure that tests are run with JUnit 4, even if the test classpath has JUnit 5  -->
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.maven.surefire</groupId>
+                                <artifactId>surefire-junit47</artifactId>
+                                <version>${surefire.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <!-- only check formatting with spotless by default -->
+            <id>format-check</id>
+            <activation>
+                <property>
+                    <name>!format</name>
+                </property>
+            </activation>
+            <properties>
+                <spotless.action>check</spotless.action>
+            </properties>
+        </profile>
+        <!-- reformat during build with spotless with -Dformat or -Pformat -->
+        <profile>
+            <id>format</id>
+            <activation>
+                <property>
+                    <name>format</name>
+                </property>
+            </activation>
+            <properties>
+                <spotless.action>apply</spotless.action>
+            </properties>
+        </profile>
     </profiles>
-
-    <mailingLists>
-        <mailingList>
-            <name>Apache Sling Users List</name>
-            <subscribe>
-                users-subscribe@sling.apache.org
-            </subscribe>
-            <unsubscribe>
-                users-unsubscribe@sling.apache.org
-            </unsubscribe>
-            <!-- to prevent scraping just point to Sling websites, which contains hints how to post -->
-            <post>https://sling.apache.org/project-information.html#mailing-lists</post>
-            <archive>
-                https://lists.apache.org/list.html?users@sling.apache.org
-            </archive>
-            <otherArchives>
-                <otherArchive>
-                    https://www.mail-archive.com/users@sling.apache.org/
-                </otherArchive>
-            </otherArchives>
-        </mailingList>
-        <mailingList>
-            <name>Apache Sling Development List</name>
-            <subscribe>
-                dev-subscribe@sling.apache.org
-            </subscribe>
-            <unsubscribe>
-                dev-unsubscribe@sling.apache.org
-            </unsubscribe>
-            <!-- to prevent scraping just point to Sling websites, which contains hints how to post -->
-            <post>https://sling.apache.org/project-information.html#mailing-lists</post>
-            <archive>
-                https://lists.apache.org/list.html?dev@sling.apache.org
-            </archive>
-            <otherArchives>
-                <otherArchive>
-                    https://www.mail-archive.com/dev@sling.apache.org/
-                </otherArchive>
-            </otherArchives>
-        </mailingList>
-        <mailingList>
-            <name>Apache Sling Source Control List</name>
-            <subscribe>
-                commits-subscribe@sling.apache.org
-            </subscribe>
-            <unsubscribe>
-                commits-unsubscribe@sling.apache.org
-            </unsubscribe>
-            <archive>
-                https://mail-archives.apache.org/mod_mbox/sling-commits/
-            </archive>
-            <otherArchives>
-                <otherArchive>
-                    https://sling-commits.markmail.org/
-                </otherArchive>
-                <otherArchive>
-                    https://www.mail-archive.com/commits@sling.apache.org/
-                </otherArchive>
-            </otherArchives>
-        </mailingList>
-    </mailingLists>
-
-    <!-- Please visit our website for the current information about the
-         Apache Sling project team. (see #SLING-1120 why we don't include
-         the list here) -->
-    <developers>
-        <developer>
-            <name>Apache Sling Project</name>
-            <id>sling</id>
-            <url>https://sling.apache.org/site/project-team.html</url>
-        </developer>
-    </developers>
-
-    <dependencyManagement>
-
-        <dependencies>
-            <!-- Web Application API -->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
-            </dependency>
-
-            <!-- Dependency injection annotations -->
-            <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>1</version>
-            </dependency>
-
-            <!-- JCR API -->
-            <dependency>
-                <groupId>javax.jcr</groupId>
-                <artifactId>jcr</artifactId>
-                <version>2.0</version>
-            </dependency>
-
-            <!-- Basic Logging -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.25</version>
-            </dependency>
-
-            <!-- JetBrains annotations for null-analysis (SLING-7798), https://github.com/JetBrains/java-annotations -->
-            <dependency>
-                <groupId>org.jetbrains</groupId>
-                <artifactId>annotations</artifactId>
-                <version>23.0.0</version>
-            </dependency>
-
-            <!-- Annotations used in Maven Plugins -->
-            <dependency>
-                <groupId>org.apache.maven.plugin-tools</groupId>
-                <artifactId>maven-plugin-annotations</artifactId>
-                <version>${maven.plugin.tools.version}</version>
-            </dependency>
-
-            <!-- Basic dependencies for Unit Tests -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.13.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>1.7.25</version>
-            </dependency>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${junit5.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 </project>
