@@ -15,7 +15,7 @@
     See the License for the specific language governing permissions
     and limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" child.project.url.inherit.append.path="false" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -117,7 +117,8 @@
              https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
              and http://openjdk.java.net/jeps/247, this affects m-compiler-p and m-javadoc-p -->
         <maven.compiler.release>${sling.java.version}</maven.compiler.release>
-        <minimalMavenBuildVersion>3.3.9</minimalMavenBuildVersion>
+        <!-- due to https://issues.apache.org/jira/browse/MNG-6059 -->
+        <minimalMavenBuildVersion>3.6.1</minimalMavenBuildVersion>
         <!-- Parameter "maven.compiler.release" requires JDK9+ and we generally only support LTS releases -->
         <minimalJavaBuildVersion>11</minimalJavaBuildVersion>
         <!-- the github id used for the ribbon for Maven sites: https://maven.apache.org/skins/maven-fluido-skin/#GitHub_ribbons -->
