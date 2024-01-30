@@ -34,6 +34,11 @@
     <name>Apache Sling Parent Reactor</name>
     <description>The reactor pom to build all Sling parents</description>
 
+    <properties>
+        <!-- sling-bundle-parent requires Java 17 -->
+        <minimalJavaBuildVersion>17</minimalJavaBuildVersion>
+    </properties>
+
     <scm>
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
