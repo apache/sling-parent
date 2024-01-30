@@ -27,7 +27,7 @@
 
     <groupId>org.apache.sling</groupId>
     <artifactId>sling</artifactId>
-    <version>60-SNAPSHOT</version>
+    <version>60</version>
     <packaging>pom</packaging>
 
     <name>Apache Sling (Parent)</name>
@@ -85,7 +85,7 @@
     <scm>
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-parent.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>sling-parent-reactor-60</tag>
         <url>https://github.com/apache/sling-parent.git</url>
     </scm>
 
