@@ -7,3 +7,5 @@
 This module is part of the [Apache Sling](https://sling.apache.org) project.
 
 This is the parent project for Apache Sling.
+
+There are major changes in version 60 which are described in <https://cwiki.apache.org/confluence/x/SI75E>.
