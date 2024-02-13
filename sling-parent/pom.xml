@@ -164,13 +164,6 @@
                 <version>23.0.0</version>
             </dependency>
 
-            <!-- Annotations used in Maven Plugins -->
-            <dependency>
-                <groupId>org.apache.maven.plugin-tools</groupId>
-                <artifactId>maven-plugin-annotations</artifactId>
-                <version>${maven.plugin.tools.version}</version>
-            </dependency>
-
             <!-- Basic dependencies for Unit Tests -->
             <dependency>
                 <groupId>junit</groupId>
