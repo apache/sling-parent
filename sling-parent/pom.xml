@@ -99,20 +99,18 @@
         <url>https://ci-builds.apache.org/job/Sling/</url>
     </ciManagement>
 
+    <!--
+        To set the Java API and class file compliance modules need to set the property "sling.java.version" to
+        one of these values:
+          - 8: Java 8 
+          - 9: Java 9
+          - 10..19: Java 10-19
+    -->
+
     <properties>
         <site.jira.version.id>12313945</site.jira.version.id>
         <site.javadoc.exclude />
-        <!--
-            Java API and class file compliance. This property supports
-            one of these values:
-              - 8: Java 8 
-              - 9: Java 9
-              - 10..19: Java 10-19
-        -->
-        <sling.java.version>11</sling.java.version>
-
         <junit5.version>5.10.1</junit5.version>
-
         <!-- release sets API classpath, source and target, see 
              https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
              and http://openjdk.java.net/jeps/247, this affects m-compiler-p and m-javadoc-p -->
@@ -280,8 +278,9 @@
                             <rules>
                                 <requireProperty>
                                     <property>sling.java.version</property>
+                                    <message>Property "sling.java.version" is required for this build and must comply with the following pattern: ^(8|9|1[0-9])$.</message>
                                     <regex>^(8|9|1[0-9])$</regex>
-                                    <regexMessage>The value of the "sling.java.version" property should comply with the following pattern: ^(8|9|1[0-9])$.</regexMessage>
+                                    <regexMessage>The value of the "sling.java.version" property must comply with the following pattern: ^(8|9|1[0-9])$.</regexMessage>
                                 </requireProperty>
                             </rules>
                         </configuration>
@@ -883,6 +882,12 @@
                             <executions>
                                 <execution>
                                     <id>enforce-output-timestamp-property</id>
+                                    <configuration>
+                                        <skip>true</skip>
+                                    </configuration>
+                                </execution>
+                                <execution>
+                                    <id>enforce-sling-java-version</id>
                                     <configuration>
                                         <skip>true</skip>
                                     </configuration>
