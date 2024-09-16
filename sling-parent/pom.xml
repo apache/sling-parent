@@ -101,10 +101,7 @@
 
     <!--
         To set the Java API and class file compliance modules need to set the property "sling.java.version" to
-        one of these values:
-          - 8: Java 8 
-          - 9: Java 9
-          - 10..19: Java 10-19
+        a value between 8 and 99.
     -->
 
     <properties>
@@ -278,9 +275,9 @@
                             <rules>
                                 <requireProperty>
                                     <property>sling.java.version</property>
-                                    <message>Property "sling.java.version" is required for this build and must comply with the following pattern: ^(8|9|1[0-9])$.</message>
-                                    <regex>^(8|9|1[0-9])$</regex>
-                                    <regexMessage>The value of the "sling.java.version" property must comply with the following pattern: ^(8|9|1[0-9])$.</regexMessage>
+                                    <message>Property "sling.java.version" is required for this build and must be between 8 and 99.</message>
+                                    <regex>^(8|9|[0-9]{2})$</regex>
+                                    <regexMessage>The value of the "sling.java.version" property must be between 8 and 99.</regexMessage>
                                 </requireProperty>
                             </rules>
                         </configuration>
