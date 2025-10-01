@@ -120,6 +120,10 @@
         <github.project.id>apache/sling-dummyproject</github.project.id>
         <javadoc.excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</javadoc.excludePackageNames>
         <slf4j.version>2.0.17</slf4j.version>
+        <!-- don't go below this minimum version to allow ITs with Oak running on Java > 14 (https://issues.apache.org/jira/browse/OAK-7358)-->
+        <oak.version>1.62.0</oak.version>
+        <!-- should be set to the minimum JR version being required by Oak set in oak.version -->
+        <jackrabbit.version>2.20.15</jackrabbit.version>
     </properties>
 
     <dependencyManagement>
@@ -149,11 +153,21 @@
                 <version>1</version>
             </dependency>
 
-            <!-- JCR API -->
+            <!-- JCR related dependencies, only rarely used but manage version as having an impact on ITs leveraging Oak -->
             <dependency>
                 <groupId>javax.jcr</groupId>
                 <artifactId>jcr</artifactId>
                 <version>2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jackrabbit</groupId>
+                <artifactId>oak-jackrabbit-api</artifactId>
+                <version>${oak.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jackrabbit</groupId>
+                <artifactId>jackrabbit-jcr-commons</artifactId>
+                <version>${jackrabbit.version}</version>
             </dependency>
 
             <!-- Basic Logging -->
@@ -251,7 +265,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.11</version>
+                    <version>0.8.13</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.servicemix.tooling</groupId>
@@ -318,6 +332,22 @@
                                         <exclude>org.jetbrains:annotations:*:*:compile</exclude>
                                     </excludes>
                                     <message>The annotation dependencies should be used with scope provided to prevent transitive inheritance and to prevent runtime inclusion</message>
+                                </bannedDependencies>
+                            </rules>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>ban-plugins-and-dependencies</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>org.apache.jackrabbit:jackrabbit-api</exclude>
+                                    </excludes>
+                                    <message>Jackrabbit API changed coordinates in newer versions (https://issues.apache.org/jira/browse/OAK-8339). Use "org.apache.jackrabbit:oak-jackrabbit-api" instead.</message>
                                 </bannedDependencies>
                             </rules>
                         </configuration>
