@@ -122,7 +122,7 @@
         <!-- don't go below this minimum version to allow ITs with Oak running on Java > 14 (https://issues.apache.org/jira/browse/OAK-7358)-->
         <oak.version>1.62.0</oak.version>
         <!-- should be set to the minimum JR version being required by Oak set in oak.version -->
-        <jackrabbit.version>2.20.15</jackrabbit.version>
+        <jackrabbit.version>2.22.2</jackrabbit.version>
     </properties>
 
     <dependencyManagement>
