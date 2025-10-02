@@ -119,6 +119,7 @@
         <!-- the github id used for the ribbon for Maven sites: https://maven.apache.org/skins/maven-fluido-skin/#GitHub_ribbons -->
         <github.project.id>apache/sling-dummyproject</github.project.id>
         <javadoc.excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</javadoc.excludePackageNames>
+        <slf4j.version>2.0.17</slf4j.version>
         <!-- don't go below this minimum version to allow ITs with Oak running on Java > 14 (https://issues.apache.org/jira/browse/OAK-7358)-->
         <oak.version>1.62.0</oak.version>
         <!-- should be set to the minimum JR version being required by Oak set in oak.version -->
@@ -132,7 +133,19 @@
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <version>4.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>6.1.0</version>
+            </dependency>
+            <!-- for bridging to/from javax/jakarta servlet classes. Make sure to use the version
+                    that is aligned with the jakarta.servlet-api release being used-->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.http.wrappers</artifactId>
+                <version>6.1.0</version>
             </dependency>
 
             <!-- Dependency injection annotations -->
@@ -163,7 +176,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.25</version>
+                <version>${slf4j.version}</version>
             </dependency>
 
             <!-- JetBrains annotations for null-analysis (SLING-7798), https://github.com/JetBrains/java-annotations -->
@@ -182,7 +195,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
-                <version>1.7.25</version>
+                <version>${slf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit</groupId>
