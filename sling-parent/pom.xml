@@ -140,6 +140,8 @@
                 <artifactId>jakarta.servlet-api</artifactId>
                 <version>6.1.0</version>
             </dependency>
+            <!-- for bridging to/from javax/jakarta servlet classes. Make sure to use the version
+                    that is aligned with the jakarta.servlet-api release being used-->
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.http.wrappers</artifactId>
