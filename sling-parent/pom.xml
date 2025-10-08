@@ -155,6 +155,13 @@
                 <version>1</version>
             </dependency>
 
+            <!-- JSON-P API, https://github.com/jakartaee/jsonp-api -->
+            <dependency>
+                <groupId>jakarta.json</groupId>
+                <artifactId>jakarta.json-api</artifactId>
+                <version>2.1.3</version>
+            </dependency>
+
             <!-- JCR related dependencies, only rarely used but manage version as having an impact on ITs leveraging Oak -->
             <dependency>
                 <groupId>javax.jcr</groupId>
