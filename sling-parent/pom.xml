@@ -120,10 +120,10 @@
         <github.project.id>apache/sling-dummyproject</github.project.id>
         <javadoc.excludePackageNames>*.impl:*.internal:${site.javadoc.exclude}</javadoc.excludePackageNames>
         <slf4j.version>2.0.17</slf4j.version>
-        <!-- don't go below this minimum version to allow ITs with Oak running on Java > 14 (https://issues.apache.org/jira/browse/OAK-7358)-->
-        <oak.version>1.62.0</oak.version>
+        <!-- don't go below this minimum version to allow ITs with Oak running on Java > 22 (https://issues.apache.org/jira/browse/OAK-11199)-->
+        <oak.version>1.74.0</oak.version>
         <!-- should be set to the minimum JR version being required by Oak set in oak.version -->
-        <jackrabbit.version>2.20.15</jackrabbit.version>
+        <jackrabbit.version>2.22.0</jackrabbit.version>
     </properties>
 
     <dependencyManagement>
