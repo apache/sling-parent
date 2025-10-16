@@ -39,9 +39,8 @@
     </scm>
 
     <properties>
-        <bnd.version>7.1.0</bnd.version>
         <!-- Bnd 7+ requires Java 17 -->
-        <minimalJavaBuildVersion>17</minimalJavaBuildVersion>
+        <bnd.version>7.1.0</bnd.version>
     </properties>
 
     <dependencyManagement>
