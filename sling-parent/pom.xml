@@ -214,6 +214,27 @@
         </dependencies>
     </dependencyManagement>
 
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>apache.snapshots</id>
+            <name>Apache Snapshot Repository</name>
+            <url>https://repository.apache.org/snapshots</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>apache.snapshots</id>
+            <name>Apache Snapshot Repository</name>
+            <url>https://repository.apache.org/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
 
         <pluginManagement>
@@ -1174,5 +1195,4 @@
             </properties>
         </profile>
     </profiles>
-
 </project>
