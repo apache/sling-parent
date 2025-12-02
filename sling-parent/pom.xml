@@ -124,8 +124,6 @@
         <oak.version>1.74.0</oak.version>
         <!-- should be set to the minimum JR version being required by Oak set in oak.version -->
         <jackrabbit.version>2.22.0</jackrabbit.version>
-        <!-- https://issues.apache.org/jira/browse/MPOM-451, enables the ASF Snapshot Maven repository in the ASF parent POM -->
-        <apache.snapshots>true</apache.snapshots>
     </properties>
 
     <dependencyManagement>
@@ -215,6 +213,28 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!-- Since https://issues.apache.org/jira/browse/MPOM-451, snapshot repos are no longer defined by default in apache parent pom. We need them for temporary snapshot dependencies in our modules -->
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>apache.snapshots</id>
+            <name>Apache Snapshot Repository</name>
+            <url>https://repository.apache.org/snapshots</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>apache.snapshots</id>
+            <name>Apache Snapshot Repository</name>
+            <url>https://repository.apache.org/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <build>
 
@@ -1176,5 +1196,4 @@
             </properties>
         </profile>
     </profiles>
-
 </project>
