@@ -124,8 +124,6 @@
         <oak.version>1.74.0</oak.version>
         <!-- should be set to the minimum JR version being required by Oak set in oak.version -->
         <jackrabbit.version>2.22.0</jackrabbit.version>
-        <!-- https://issues.apache.org/jira/browse/MPOM-451, enables the ASF Snapshot Maven repository in the ASF parent POM -->
-        <apache.snapshots>true</apache.snapshots>
     </properties>
 
     <dependencyManagement>
