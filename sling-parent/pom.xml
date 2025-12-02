@@ -214,6 +214,7 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- Since https://issues.apache.org/jira/browse/MPOM-451, snapshot repos are no longer defined by default in apache parent pom. We need them for temporary snapshot dependencies in our modules -->
     <repositories>
         <repository>
             <releases>
