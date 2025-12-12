@@ -261,7 +261,7 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <configuration>
                         <!-- leave absolute URLs untouched, like image urls in header: https://maven.apache.org/plugins/maven-site-plugin/site-mojo.html#relativizeDecorationLinks -->
-                        <relativizeDecorationLinks>false</relativizeDecorationLinks>
+                        <relativizeSiteLinks>false</relativizeSiteLinks>
                     </configuration>
                 </plugin>
                 <plugin>
