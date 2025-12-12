@@ -18,26 +18,20 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 -->
-<project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd">
+<site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
     <skin>
         <groupId>org.apache.maven.skins</groupId>
         <artifactId>maven-fluido-skin</artifactId>
-        <version>1.12.0</version>
+        <version>${version.maven-fluido-skin}</version>
     </skin>
     <version position="right"/>
     <publishDate position="right"/>
-    <bannerLeft>
-        <name>Apache Sling</name>
-        <src>https://sling.apache.org/res/logos/sling.svg</src>
-        <href>https://sling.apache.org/</href>
-        <height>63px</height>
-        <width>123px</width>
+    <bannerLeft href="https://sling.apache.org/">
+        <image src="https://sling.apache.org/res/logos/sling.svg" height="80px" alt="Sling Logo"/>
     </bannerLeft>
-    <bannerRight>
-        <name>Apache</name>
-        <src>https://sling.apache.org/res/logos/apache.png</src>
-        <href>https://apache.org/</href>
+    <bannerRight href="https://apache.org/">
+        <image src="https://apache.org/images/asflogo_horizontal_color.svg" height="80px" alt="Apache Software Foundation (ASF) Logo" />
     </bannerRight>
     <edit>${project.scm.url}</edit>
     <body>
@@ -58,6 +52,7 @@ under the License.
               <projectId>${github.project.id}</projectId>
               <ribbonOrientation>right</ribbonOrientation>
               <ribbonColor>gray</ribbonColor>
+              <anchorJs />
             </gitHub>
         </fluidoSkin>
         <matomo>
@@ -70,4 +65,4 @@ under the License.
             </options>
         </matomo>
     </custom>
-</project>
+</site>
