@@ -261,7 +261,7 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <configuration>
                         <!-- leave absolute URLs untouched, like image urls in header: https://maven.apache.org/plugins/maven-site-plugin/site-mojo.html#relativizeDecorationLinks -->
-                        <relativizeDecorationLinks>false</relativizeDecorationLinks>
+                        <relativizeSiteLinks>false</relativizeSiteLinks>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -544,6 +544,21 @@
                             <goal>${spotless.action}</goal>
                         </goals>
                         <phase>process-sources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- deploy site.xml as being used in downstream dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <!-- should not be executed in inheriting projects-->
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
