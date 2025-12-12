@@ -547,6 +547,21 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- deploy site.xml as being used in downstream dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <!-- should not be executed in inheriting projects-->
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
