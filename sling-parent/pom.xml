@@ -113,8 +113,7 @@
              https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
              and http://openjdk.java.net/jeps/247, this affects m-compiler-p and m-javadoc-p -->
         <maven.compiler.release>${sling.java.version}</maven.compiler.release>
-        <!-- due to https://issues.apache.org/jira/browse/MNG-6059 -->
-        <minimalMavenBuildVersion>3.6.1</minimalMavenBuildVersion>
+        <minimalMavenBuildVersion>3.9.6</minimalMavenBuildVersion>
         <!-- Parameter "maven.compiler.release" requires JDK9+ and we generally only support LTS releases -->
         <minimalJavaBuildVersion>17</minimalJavaBuildVersion>
         <!-- the github id used for the ribbon for Maven sites: https://maven.apache.org/skins/maven-fluido-skin/#GitHub_ribbons -->
