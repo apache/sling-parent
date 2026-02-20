@@ -40,7 +40,7 @@
 
     <properties>
         <!-- Bnd 7+ requires Java 17 -->
-        <bnd.version>7.1.0</bnd.version>
+        <bnd.version>7.2.1</bnd.version>
     </properties>
 
     <dependencyManagement>
@@ -218,7 +218,7 @@
                 <plugin>
                     <groupId>org.apache.sling</groupId>
                     <artifactId>sling-maven-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <version>3.0.4</version>
                 </plugin>
                 <plugin>
                     <groupId>biz.aQute.bnd</groupId>
