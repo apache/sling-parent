@@ -107,7 +107,8 @@
     <properties>
         <site.jira.version.id>12313945</site.jira.version.id>
         <site.javadoc.exclude />
-        <junit5.version>5.14.3</junit5.version>
+        <!-- JUnit 5/6 version - we keep the property name junit5.version as it's the same architecture -->
+        <junit5.version>6.0.3</junit5.version>
         <mockito.version>5.21.0</mockito.version>
         <!-- release sets API classpath, source and target, see 
              https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
@@ -513,7 +514,7 @@
                         <!-- orders of used formatters are important MPOM-376 -->
                         <!-- eg. palantir overrides importOrder, so should be first -->
                         <palantirJavaFormat>
-                            <version>2.80.0</version>
+                            <version>2.88.0</version>
                         </palantirJavaFormat>
                         <removeUnusedImports />
                         <!-- https://github.com/diffplug/spotless/tree/main/plugin-maven#java -->
