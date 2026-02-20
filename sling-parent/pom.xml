@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>35</version>
+        <version>37</version>
         <relativePath />
     </parent>
 
@@ -109,10 +109,8 @@
         <site.javadoc.exclude />
         <junit5.version>5.14.2</junit5.version>
         <mockito.version>5.21.0</mockito.version>
-        <!-- release sets API classpath, source and target, see 
-             https://docs.oracle.com/javase/9/tools/javac.htm#GUID-AEEC9F07-CB49-4E96-8BC7-BCC2C7F725C9__GUID-D343F6B4-3FDD-43A8-AD24-43DD70214471 
-             and http://openjdk.java.net/jeps/247, this affects m-compiler-p and m-javadoc-p -->
-        <maven.compiler.release>${sling.java.version}</maven.compiler.release>
+        <!-- release sets API classpath, source and target -->
+        <javaVersion>${sling.java.version}</javaVersion>
         <minimalMavenBuildVersion>3.9.6</minimalMavenBuildVersion>
         <!-- Parameter "maven.compiler.release" requires JDK9+ and we generally only support LTS releases -->
         <minimalJavaBuildVersion>17</minimalJavaBuildVersion>
