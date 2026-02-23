@@ -1196,23 +1196,23 @@
             </build>
         </profile>
         <profile>
-            <!-- only check formatting with spotless by default -->
+            <!-- only check formatting with spotless by default in CI builds -->
             <id>format-check</id>
             <activation>
                 <property>
-                    <name>!format</name>
+                    <name>env.CI</name>
                 </property>
             </activation>
             <properties>
                 <spotless.action>check</spotless.action>
             </properties>
         </profile>
-        <!-- reformat during build with spotless with -Dformat or -Pformat -->
+        <!-- reformat during build with spotless with -Pformat -->
         <profile>
             <id>format</id>
             <activation>
                 <property>
-                    <name>format</name>
+                    <name>!env.CI</name>
                 </property>
             </activation>
             <properties>
