@@ -325,6 +325,16 @@
                     <artifactId>spotless-maven-plugin</artifactId>
                     <version>3.2.1</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <configuration>
+                        <externalJavadocBaseUrls>
+                            <externalJavadocBaseUrl>https://docs.oracle.com/en/java/javase/${sling.java.version}/docs/api/</externalJavadocBaseUrl>
+                            <externalJavadocBaseUrl>https://sling.apache.org/apidocs/latest/</externalJavadocBaseUrl>
+                        </externalJavadocBaseUrls>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
