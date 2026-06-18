@@ -552,7 +552,7 @@
                         <goals>
                             <goal>${spotless.action}</goal>
                         </goals>
-                        <phase>process-sources</phase>
+                        <phase>verify</phase>
                     </execution>
                 </executions>
             </plugin>
