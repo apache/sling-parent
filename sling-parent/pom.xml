@@ -549,10 +549,13 @@
                 </dependencies>
                 <executions>
                     <execution>
+                        <!-- explicit ignore necessary for m2e due to https://github.com/eclipse-m2e/m2e-core/issues/2193,
+                        syntax described in https://eclipse.dev/m2e/documentation/release-notes-17.html#new-syntax-for-specifying-lifecycle-mapping-metadata-->
+                        <?m2e ignore?>
                         <goals>
                             <goal>${spotless.action}</goal>
                         </goals>
-                        <phase>process-sources</phase>
+                        <phase>verify</phase>
                     </execution>
                 </executions>
             </plugin>
