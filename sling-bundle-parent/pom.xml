@@ -40,7 +40,7 @@
 
     <properties>
         <!-- Bnd 7+ requires Java 17 -->
-        <bnd.version>7.2.1</bnd.version>
+        <bnd.version>7.3.0</bnd.version>
     </properties>
 
     <dependencyManagement>
